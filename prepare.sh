@@ -17,7 +17,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # git clone scripts
-cp step-git-clone/ssh_no_prompt.sh ~/ssh_no_prompt.sh
+cp steps-git-clone/ssh_no_prompt.sh ~/ssh_no_prompt.sh
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -26,7 +26,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-cp step-git-clone/git_clone.rb ~/git_clone.rb
+cp steps-git-clone/git_clone.rb ~/git_clone.rb
 if [ $? -ne 0 ]; then
   exit 1
 fi
