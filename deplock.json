@@ -1,0 +1,8 @@
+{
+	"dep_locks": [
+		{
+			"url": "https://github.com/concretebuilder/steps-git-clone.git",
+			"revision": "10a631f2ce0e3e0dc4e29b5f187d9578a0f1754e"
+		}
+	]
+}
