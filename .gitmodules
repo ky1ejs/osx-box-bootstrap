@@ -1,3 +1,0 @@
-[submodule "steps-git-clone"]
-	path = steps-git-clone
-	url = https://github.com/concretebuilder/steps-git-clone.git
