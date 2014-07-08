@@ -1,0 +1,8 @@
+{
+	"deps":[
+		{
+			"url": "https://github.com/concretebuilder/steps-git-clone.git",
+			"store_path": "steps-git-clone"
+		}
+	]
+}
