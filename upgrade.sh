@@ -16,6 +16,7 @@ print_and_do_command brew upgrade
 #
 print_and_do_command rvm osx-ssl-certs update all
 print_and_do_command rvm get stable
+print_and_do_command rvm osx-ssl-certs update all
 #
 print_and_do_command gem update --system
 print_and_do_command gem update
@@ -28,4 +29,6 @@ echo "<-- Finished with system refresh"
 
 echo "--> Starting system upgrade..."
 print_and_do_command sudo softwareupdate --install --all
+# print the current OS version, for debugging
+print_and_do_command sw_vers
 echo "<-- Finished with system upgrade"
