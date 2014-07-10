@@ -1,0 +1,13 @@
+export DOTBASHRC_LOADED=1
+export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+export LC_ALL="en_US.UTF-8"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Go
+export PATH="$PATH:/usr/local/opt/go/libexec/bin"
+export GOPATH="$HOME/go"
+
+# Bitrise step connection Environment Variables
+[[ -s "$HOME/.bitrise_profile" ]] && source "$HOME/.bitrise_profile"
+
+# keep a newline at the end of this file
