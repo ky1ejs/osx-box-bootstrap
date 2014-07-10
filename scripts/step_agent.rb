@@ -24,7 +24,7 @@ rescue
   exit 1
 end
 
-File.delete('.concrete_step_inputs') if File.exists?('.concrete_step_inputs')
+File.delete('.bitrise_step_inputs') if File.exists?('.bitrise_step_inputs')
 
 args.each do |arg|
   arg.split(",").each do |env_var|
@@ -45,7 +45,7 @@ args.each do |arg|
     if key and value
       if key == '__INPUT_FILE__'
         # write the value to a file, and store the file's path as value, in the Environment
-        tmp_folder_pth = File.join(Dir.home, 'concrete/tmp')
+        tmp_folder_pth = File.join(Dir.home, 'bitrise/tmp')
         system "mkdir -p \"#{tmp_folder_pth}\""
         step_input_store_file_path = "#{tmp_folder_pth}/step_input_store"
         puts " (i) Value will be saved into the input_store file: #{step_input_store_file_path}"
@@ -54,9 +54,9 @@ args.each do |arg|
       end
 
       puts "$ export #{key}=\"#{value}\""
-      File.open('.concrete_step_inputs', 'a') { |f| f.write("export #{key}=\"#{value}\" ") }
+      File.open('.bitrise_step_inputs', 'a') { |f| f.write("export #{key}=\"#{value}\" ") }
 
-      saved_value = `source .concrete_step_inputs 2> /dev/null && echo $#{key}`.chomp
+      saved_value = `source .bitrise_step_inputs 2> /dev/null && echo $#{key}`.chomp
       ENV[key] = saved_value unless saved_value.empty?
     else
       puts "[i] Key or Value is missing - won't add it to the environment (#{key} = #{value})"
