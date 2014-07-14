@@ -17,6 +17,7 @@ print_and_do_command brew upgrade
 print_and_do_command rvm osx-ssl-certs update all
 print_and_do_command rvm get stable
 print_and_do_command rvm osx-ssl-certs update all
+source ~/.bash_profile
 #
 print_and_do_command gem update --system
 print_and_do_command gem update
