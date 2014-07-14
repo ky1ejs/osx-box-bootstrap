@@ -1,3 +1,5 @@
 #
 export DOTPROFILE_LOADED=1
 [[ -s "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
