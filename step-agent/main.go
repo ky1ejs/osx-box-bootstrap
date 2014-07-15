@@ -88,7 +88,7 @@ func runStepWithAdditionalEnvironment(commandPath string, envsToAdd []EnvKeyValu
 	if envLength > 0 {
 		envStringPairs := make([]string, len(envsToAdd), len(envsToAdd))
 		for idx, aEnvPair := range envsToAdd {
-			envStringPairs[idx] = aEnvPair.String()
+			envStringPairs[idx] = aEnvPair.ToStringWithExpand()
 		}
 		c.Env = append(os.Environ(), envStringPairs...)
 	}
