@@ -11,7 +11,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # step_agent
-cp scripts/step_agent.rb ~/.step_agent.rb
+cp step-agent/bin/step_agent_osx ~/.step_agent
 if [ $? -ne 0 ]; then
   exit 1
 fi
