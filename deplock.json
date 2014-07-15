@@ -1,8 +1,12 @@
 {
 	"dep_locks": [
 		{
-			"url": "https://github.com/concretebuilder/steps-git-clone.git",
-			"revision": "10a631f2ce0e3e0dc4e29b5f187d9578a0f1754e"
+			"url": "https://github.com/bitrise-io/steps-git-clone.git",
+			"revision": "22044d4ec1b4ad165bdb6a8b538f50f564cc96b5"
+		},
+		{
+			"url": "https://github.com/bitrise-io/step-agent-go.git",
+			"revision": "cfa8f7469469728d6353166a9326c3fb891d0a96"
 		}
 	]
 }

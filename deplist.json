@@ -1,8 +1,12 @@
 {
 	"deps":[
 		{
-			"url": "https://github.com/concretebuilder/steps-git-clone.git",
+			"url": "https://github.com/bitrise-io/steps-git-clone.git",
 			"store_path": "steps-git-clone"
+		},
+		{
+			"url": "https://github.com/bitrise-io/step-agent-go.git",
+			"store_path": "step-agent"
 		}
 	]
 }
