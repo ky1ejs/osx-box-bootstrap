@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -14,6 +15,10 @@ type EnvKeyValuePair struct {
 
 func (envKeyValPair *EnvKeyValuePair) String() string {
 	return envKeyValPair.Key + "=" + envKeyValPair.Value
+}
+
+func (e *EnvKeyValuePair) ToStringWithExpand() string {
+	return fmt.Sprintf("%s=%s", e.Key, os.ExpandEnv(e.Value))
 }
 
 func decodeEnvKeyValuePair(combinedEncodedKeyValue string) (EnvKeyValuePair, error) {
