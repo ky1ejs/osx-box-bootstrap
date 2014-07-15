@@ -79,8 +79,10 @@ func filterEnvironmentKeyValuePairs(envKeyValuePair []EnvKeyValuePair) []EnvKeyV
 	return filteredPairs
 }
 
-func runCommandWithAdditionalEnvironment(commandPath string, envsToAdd []EnvKeyValuePair) error {
-	c := exec.Command(commandPath)
+func runStepWithAdditionalEnvironment(commandPath string, envsToAdd []EnvKeyValuePair) error {
+	commandDir := filepath.Dir(commandPath)
+	commandName := filepath.Base(commandPath)
+	c := exec.Command("bash", commandName)
 
 	envLength := len(envsToAdd)
 	if envLength > 0 {
@@ -90,6 +92,7 @@ func runCommandWithAdditionalEnvironment(commandPath string, envsToAdd []EnvKeyV
 		}
 		c.Env = append(os.Environ(), envStringPairs...)
 	}
+	c.Dir = commandDir
 	c.Stdout = os.Stdout
 	c.Stderr = os.Stderr
 	if err := c.Run(); err != nil {
@@ -126,10 +129,7 @@ func perform(encodedStepPath, encodedCombinedStepEnvs string) error {
 	filteredEnvPairs := filterEnvironmentKeyValuePairs(decodedStepEnvPairs)
 
 	fmt.Println("Perform: ", decodedStepCommand, filteredEnvPairs)
-	if err := runCommandWithArgs("chmod", "+x", decodedStepCommand); err != nil {
-		return err
-	}
-	return runCommandWithAdditionalEnvironment(decodedStepCommand, filteredEnvPairs)
+	return runStepWithAdditionalEnvironment(decodedStepCommand, filteredEnvPairs)
 }
 
 func usage() {

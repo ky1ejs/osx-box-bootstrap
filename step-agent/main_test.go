@@ -23,6 +23,11 @@ func Test_perform(t *testing.T) {
 		t.Error("should return an error")
 	}
 
+	// should call the step from the step's directory!
+	if err := perform(encodeSingleValue("./testfiles/step_ref_another_one.sh"), ""); err != nil {
+		t.Error("working dir should be the step's dir! - error returned: ", err)
+	}
+
 	// envs := []EnvKeyValuePair{
 	// 	EnvKeyValuePair{
 	// 		Key:   "TESTKEY",
