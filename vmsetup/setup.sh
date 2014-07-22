@@ -22,13 +22,6 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPTDIR"
 
 
-echo " (i) Profile setups..."
-print_and_do_command_exit_on_error cp ../profiles/bashrc ~/.bashrc
-print_and_do_command_exit_on_error cp ../profiles/profile ~/.profile
-print_and_do_command_exit_on_error cp ../profiles/bash_profile ~/.bash_profile
-print_and_do_command_exit_on_error source ~/.bash_profile
-
-
 echo " (i) SSH setup..."
 print_and_do_command mkdir -p ~/.ssh
 print_and_do_command cp ./authorized_keys ~/.ssh/authorized_keys
@@ -59,6 +52,13 @@ if [ $? -ne 0 ]; then
 	echo " [!] Failed!"
 	exit 1
 fi
+
+
+echo " (i) Profile setups..."
+print_and_do_command_exit_on_error cp ../profiles/bashrc ~/.bashrc
+print_and_do_command_exit_on_error cp ../profiles/profile ~/.profile
+print_and_do_command_exit_on_error cp ../profiles/bash_profile ~/.bash_profile
+print_and_do_command_exit_on_error source ~/.bash_profile
 
 
 echo
