@@ -27,8 +27,8 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-# bash_profile should load bashrc
-print_and_do_command_exit_on_error source ~/.bash_profile
+# 
+print_and_do_command_exit_on_error source ~/.bashrc
 print_and_do_command_exit_on_error mkdir -p "$GOPATH/src"
 print_and_do_command_exit_on_error mkdir -p "$GOPATH/bin"
 print_and_do_command_exit_on_error mkdir -p "$GOPATH/pkg"

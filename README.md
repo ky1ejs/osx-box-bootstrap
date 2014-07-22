@@ -9,6 +9,11 @@ Uses [DepMan](https://github.com/viktorbenei/depman) for dependency management
 # Parts
 
 
+## VM Setup
+
+To provision a brand new Virtual Machine - do the setups, automatically as much as possible.
+
+
 ## Bootstrapping
 
 * **prepare.sh** : prepares the Virtual Machine for bootstrapping.
