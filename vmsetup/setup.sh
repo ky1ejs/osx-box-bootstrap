@@ -71,7 +71,20 @@ echo " (i) Profile setups..."
 print_and_do_command_exit_on_error cp ../profiles/bashrc ~/.bashrc
 print_and_do_command_exit_on_error cp ../profiles/profile ~/.profile
 print_and_do_command_exit_on_error cp ../profiles/bash_profile ~/.bash_profile
+print_and_do_command_exit_on_error cp ../profiles/bitrise_profile ~/.bitrise_profile
 print_and_do_command_exit_on_error source ~/.bash_profile
+
+
+echo " (i) Preparing base directories..."
+print_and_do_command_exit_on_error mkdir -p "$BITRISE_SOURCE_DIR"
+print_and_do_command_exit_on_error mkdir -p "$BITRISE_STEP_DIR"
+print_and_do_command_exit_on_error mkdir -p "$BITRISE_DEPLOY_DIR"
+print_and_do_command_exit_on_error mkdir -p "$BITRISE_LIBRARY_DIR"
+print_and_do_command_exit_on_error mkdir -p "$BITRISE_PROFILE_DIR"
+print_and_do_command_exit_on_error mkdir -p "$BITRISE_SYM_ROOT"
+print_and_do_command_exit_on_error mkdir -p "$BITRISE_OBJ_ROOT"
+print_and_do_command_exit_on_error mkdir -p "$BITRISE_FOLDER_PATH"
+print_and_do_command_exit_on_error mkdir -p "$BITRISE_STEP_DATA_FOLDER_PATH"
 
 
 echo " (i) Initialising box-info.json..."

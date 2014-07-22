@@ -18,6 +18,8 @@ After the OS Install wait at least 10 minutes - for OS X indexing and other syst
     * this have to be run in GUI mode, it will present a popup
 * disable App Store automatic updates
 * disable Energy Saver settings: System Preferences / Energy Saver; disable every sleep setting
+* turn on "auto login to user"
+* turn off screen saver
 
 ## Auto setup
 
