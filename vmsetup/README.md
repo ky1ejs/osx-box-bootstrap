@@ -2,6 +2,10 @@
 
 After the OS Install wait at least 10 minutes - for OS X indexing and other system maintenance processes.
 
+**important**
+
+* when you create the OS X user the username should be "vagrant" and the password should be "vagrant" too
+
 
 ## Manual setup steps
 
