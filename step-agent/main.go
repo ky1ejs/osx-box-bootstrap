@@ -64,7 +64,7 @@ func filterEnvironmentKeyValuePairs(envKeyValuePair []EnvKeyValuePair) []EnvKeyV
 			continue
 		}
 		if aPair.Value == "" {
-			log.Printf("[i] Value is missing - won't add it to the environment (Key: %s)\n", aPair.Key)
+			log.Printf("[i] Value is missing - won't add it to the environment (default value will be used by the Step) (Key: %s)\n", aPair.Key)
 			continue
 		}
 
