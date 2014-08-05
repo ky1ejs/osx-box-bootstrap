@@ -16,8 +16,8 @@ function print_and_do_command_exit_on_error {
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 print_and_do_command_exit_on_error source "$HOME/.rvm/scripts/rvm"
 print_and_do_command_exit_on_error source ~/.bash_profile
-print_and_do_command_exit_on_error rvm install ruby-2.0.0 --disable-binary
-print_and_do_command_exit_on_error rvm use --default 2.0.0
+print_and_do_command_exit_on_error rvm install ruby-2.1.2 --disable-binary
+print_and_do_command_exit_on_error rvm use --default 2.1.2
 print_and_do_command_exit_on_error rvm list
 print_and_do_command_exit_on_error which ruby
 print_and_do_command_exit_on_error ruby --version
