@@ -11,11 +11,6 @@ import (
 	"path/filepath"
 )
 
-var (
-	flagEncodedStepPath         = flag.String("steppath", "", "[REQUIRED] step's path (base64 encoded)")
-	flagEncodedCombinedStepEnvs = flag.String("stepenvs", "", "[REQUIRED] step's encoded-combined environment key-value pairs")
-)
-
 func writeStringToFile(filePath, content string) error {
 	if filePath == "" {
 		return errors.New("No path provided!")
@@ -89,6 +84,10 @@ func runStepWithAdditionalEnvironment(commandPath string, envsToAdd []EnvKeyValu
 		envStringPairs := make([]string, len(envsToAdd), len(envsToAdd))
 		for idx, aEnvPair := range envsToAdd {
 			envStringPairs[idx] = aEnvPair.ToStringWithExpand()
+			// set as env, so subsequent expansions can use it
+			if err := os.Setenv(aEnvPair.Key, os.ExpandEnv(aEnvPair.Value)); err != nil {
+				fmt.Println(" [!] Failed to set Env: ", aEnvPair)
+			}
 		}
 		c.Env = append(os.Environ(), envStringPairs...)
 	}
@@ -138,6 +137,11 @@ func usage() {
 }
 
 func main() {
+	var (
+		flagEncodedStepPath         = flag.String("steppath", "", "[REQUIRED] step's path (base64 encoded)")
+		flagEncodedCombinedStepEnvs = flag.String("stepenvs", "", "[REQUIRED] step's encoded-combined environment key-value pairs")
+	)
+
 	flag.Usage = usage
 	flag.Parse()
 

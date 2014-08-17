@@ -1,5 +1,11 @@
 #!/bin/bash
 
+go test ./...
+if [ $? -ne 0 ]; then
+	echo " [!] Go Test failed"
+	exit 1
+fi
+
 # run the build
 bash scripts/make_osx.sh
 if [ $? -ne 0 ]; then
