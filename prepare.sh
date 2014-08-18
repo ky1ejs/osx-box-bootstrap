@@ -1,60 +1,38 @@
 #!/bin/bash
 
+
+function print_and_do_command {
+  echo "-> $ $@"
+  $@
+}
+
+function print_and_do_command_exit_on_error {
+  print_and_do_command $@
+  if [ $? -ne 0 ]; then
+    echo " [!] Failed!"
+    exit 1
+  fi
+}
+
 # boostrap.sh
-cp scripts/bootstrap.sh ~/.bootstrap.sh
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-chmod +x ~/.bootstrap.sh
-if [ $? -ne 0 ]; then
-  exit 1
-fi
+print_and_do_command_exit_on_error cp scripts/bootstrap.sh ~/.bootstrap.sh
+print_and_do_command_exit_on_error chmod +x ~/.bootstrap.sh
+
 
 # step_agent
-cp step-agent/bin/step_agent_osx ~/.step_agent
-if [ $? -ne 0 ]; then
-  exit 1
-fi
+print_and_do_command_exit_on_error cp step-agent/bin/step_agent_osx ~/.step_agent
 
 # git clone scripts
-cp steps-git-clone/ssh_no_prompt.sh ~/ssh_no_prompt.sh
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-chmod +x ~/ssh_no_prompt.sh
-if [ $? -ne 0 ]; then
-  exit 1
-fi
+print_and_do_command_exit_on_error cp steps-git-clone/ssh_no_prompt.sh ~/ssh_no_prompt.sh
+print_and_do_command_exit_on_error chmod +x ~/ssh_no_prompt.sh
 
-cp steps-git-clone/git_clone.rb ~/git_clone.rb
-if [ $? -ne 0 ]; then
-  exit 1
-fi
+print_and_do_command_exit_on_error cp steps-git-clone/git_clone.rb ~/git_clone.rb
 
 # profiles
-
-cp profiles/bitrise_profile ~/.bitrise_profile
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-
-cp profiles/bashrc ~/.bashrc
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-
-cp profiles/profile ~/.profile
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-
-cp profiles/bash_profile ~/.bash_profile
-if [ $? -ne 0 ]; then
-  exit 1
-fi
+print_and_do_command_exit_on_error cp profiles/bitrise_profile ~/.bitrise_profile
+print_and_do_command_exit_on_error cp profiles/bashrc ~/.bashrc
+print_and_do_command_exit_on_error cp profiles/profile ~/.profile
+print_and_do_command_exit_on_error cp profiles/bash_profile ~/.bash_profile
 
 # (i) bash_profile sources profile, which sources bashrc which sources bitrise_profile
-source ~/.bash_profile
-if [ $? -ne 0 ]; then
-  exit 1
-fi
+print_and_do_command_exit_on_error source ~/.bash_profile
