@@ -19,6 +19,7 @@
 # PermitRootLogin no
 # LogLevel VERBOSE
 # UseDNS no
+# UsePAM no -> if this is not set to 'no' then password authentication still possible!
 #
 # -----------------------
 
@@ -108,7 +109,7 @@ PermitEmptyPasswords no
 # Also, PAM will deny null passwords by default.  If you need to allow
 # null passwords, add the "	nullok" option to the end of the
 # securityserver.so line in /etc/pam.d/sshd.
-#UsePAM yes
+UsePAM no
 
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
