@@ -15,8 +15,10 @@ After the OS Install wait at least 10 minutes - for OS X indexing and other syst
     * add to the end ($ sudo visudo): vagrant ALL=(ALL) NOPASSWD: ALL
 * install Xcode
     * if you install Xcode from the App Store **don't forget to sign out from the App Store!**
+      * but installing from DMG is preferred!
     * after install run it at least once
     * open Organizer and Enable Developer Mode for the Mac
+      * or run: $ sudo DevToolsSecurity -enable
     * and install all the available SDKs
 * run: $ xcode-select --install
     * this have to be run in GUI mode, it will present a popup
