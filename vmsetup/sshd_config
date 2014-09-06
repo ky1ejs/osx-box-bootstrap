@@ -19,7 +19,9 @@
 # PermitRootLogin no
 # LogLevel VERBOSE
 # UseDNS no
-# UsePAM no -> if this is not set to 'no' then password authentication still possible!
+# [!] DON'T use UsePAM no, it conflicts with running Xcode Unit Tests through SSH! - use 'ChallengeResponseAuthentication no' instead!
+# //////UsePAM no -> if this is not set to 'no' then password authentication still possible!
+# ChallengeResponseAuthentication no
 #
 # -----------------------
 
@@ -84,7 +86,7 @@ PasswordAuthentication no
 PermitEmptyPasswords no
 
 # Change to no to disable s/key passwords
-#ChallengeResponseAuthentication yes
+ChallengeResponseAuthentication no
 
 # Kerberos options
 #KerberosAuthentication no
@@ -109,7 +111,7 @@ PermitEmptyPasswords no
 # Also, PAM will deny null passwords by default.  If you need to allow
 # null passwords, add the "	nullok" option to the end of the
 # securityserver.so line in /etc/pam.d/sshd.
-UsePAM no
+#UsePAM no
 
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
