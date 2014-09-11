@@ -86,6 +86,9 @@ print_and_do_command_exit_on_error mkdir -p "$BITRISE_OBJ_ROOT"
 print_and_do_command_exit_on_error mkdir -p "$BITRISE_FOLDER_PATH"
 print_and_do_command_exit_on_error mkdir -p "$BITRISE_STEP_DATA_FOLDER_PATH"
 
+echo " (i) Install XCUServer (Xcode Unit Test Server)..."
+print_and_do_command_exit_on_error bash ../installers/install_xcuserver.sh
+
 
 echo " (i) Initialising box-info.json..."
 print_and_do_command_exit_on_error cp ./box-info.json ~/Desktop/box-info.json
@@ -96,6 +99,6 @@ echo "---> Finished with automatic stuff - but here's some things you have to do
 echo
 echo " (*) Set the correct version in ~/Desktop/box-info.json!"
 echo " (!) ssh config changed so you won't be able to log in with password (after the ssh daemon or system restart) - check ~/.ssh/authorized_keys for ssh keys!"
-echo " (!) After you finished with the preparations RESTART the machine! (just to be sure)"
+echo " (!) After you finished with the preparations RESTART the machine!"
 echo
 echo "---> Finished"
