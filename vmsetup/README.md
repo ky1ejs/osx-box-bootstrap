@@ -19,7 +19,8 @@ After the OS Install wait at least 10 minutes - for OS X indexing and other syst
     * after install run it at least once
     * open Organizer and Enable Developer Mode for the Mac
       * or run: $ sudo DevToolsSecurity -enable
-    * and install all the available SDKs
+    * install all the available SDKs and iOS Simulators (or the ones you want to use)
+      * Xcode -> Preferences -> Downloads -> Components
 * run: $ xcode-select --install
     * this have to be run in GUI mode, it will present a popup
 * disable App Store automatic updates
