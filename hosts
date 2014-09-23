@@ -1,0 +1,3 @@
+# for a VirtualBox VM with default NAT and (vagrant)
+#  port forward settings
+vagrant ansible_ssh_port=2222 ansible_ssh_host=127.0.0.1
