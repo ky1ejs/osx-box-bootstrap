@@ -65,6 +65,23 @@ the password should be *vagrant* too.
     Xcode versions as specified in the Bitrise Dev Center
     [Xcode version support guideline](http://devcenter.bitrise.io/docs/xcode-version-support.html)
 
+### Parallels
+
+To isolate / secure the VM you should disable every sharing option.
+
+*Note: you don't even have to install the Parallels Tools,
+the VM is fully functional without it except shared folders
+which would be disabled anyway for security*
+
+Do/check the following settings in Parallels - Select the VM -
+Virtual Machine menu - Configure:
+
+* Options
+  * Advanced: Do not sync the time from the host OS X (without the Parallels Tools installed in the VM it's not an option anyway)
+  * Advanced: don't share the clipboard
+* Security
+  * enable Isolate Mac from virtual machine (disables shared folders, clipboard sharing, etc.)
+
 ## Auto setup
 
 After the manual setup steps you can start the automatic setup.
