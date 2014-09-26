@@ -37,6 +37,10 @@
         validate='visudo -cf %s'"
 
     #
+    # Switch to Xcode 6, for brew-ing
+    - shell: bash --login -c "sudo xcode-select --switch /Applications/Xcodes/Xcode6.app/Contents/Developer"
+
+    #
     # SSH config
     - name: ensure .ssh folder is ok
       file: path=/Users/{{ param_user }}/.ssh
@@ -203,7 +207,12 @@
         mode=0700
 
     #
+    # Switch to Xcode 6, the default Xcode for building
+    - shell: bash --login -c "sudo xcode-select --switch /Applications/Xcodes/Xcode6.app/Contents/Developer"
+
+    #
     # Final debug prints
     - debug: msg="---> Finished with automatic stuff - but here's some things you have to do manually:"
     - debug: msg=" (!) After you finished with the preparations RESTART the machine!"
+    - debug: msg=" (!) Don't forget to remove the VM snapshots before packaging!"
     - debug: msg="---> Finished"

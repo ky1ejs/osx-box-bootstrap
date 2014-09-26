@@ -84,6 +84,9 @@ Virtual Machine menu - Configure:
 
 ## Auto setup
 
+*It's recommended to create a VM snapshot before you would start
+the auto setup, for easier debugging / issue fixing*
+
 After the manual setup steps you can start the automatic setup.
 
 The auto setup uses [Ansible](http://www.ansible.com/home).
@@ -124,13 +127,14 @@ Some notes for experimenting with VirtualBox based OS X VMs:
 
 * how to install OS X guest in VirtualBox running on OS X: [http://engineering.bittorrent.com/2014/07/16/how-to-guide-for-mavericks-vm-on-mavericks/](http://engineering.bittorrent.com/2014/07/16/how-to-guide-for-mavericks-vm-on-mavericks/)
   * detailed step-by-step guide, with images, from step 0 (downloading OS X installer from the App Store) to up-and-running
-  * NOTE: the new Haswell based Intel CPUs are still not yet properly supported
+  * NOTES:
+    * the new Haswell based Intel CPUs are still not yet properly supported
     and require a (quick) workaround - detailed in the article.
     * to tweak the CPU performance you could try other CPU IDs:
       * VBoxManage modifyvm <vmname> --cpuidset 1 000206a7 02100800 1fbae3bf bfebfbff [source](https://www.virtualbox.org/ticket/12802)
     * our best configuration so far (set it before starting the VM!)
       * 2 CPU, execution cap 100%
-      * 3072 MB RAM
+      * 3072 MB RAM (4096 if you can afford it)
       * Chipset: PIIX3
       * 128MB VRAM (video ram)
       * enable all the acceleration features (except 2D acceleration)
@@ -173,6 +177,11 @@ Some notes for experimenting with VirtualBox based OS X VMs:
 
 ## Packaging a (base) box
 
+*Don't forget to remove the snapshots you used before packaging
+(for smaller box)*
+
+### VirtualBox
+
   $ vagrant package --base [vm name in VirtualBox]
 
 This will create a package.box file in the current directory you're in.
@@ -184,6 +193,11 @@ to package a new box based on the one in Vagrant.
 
 Use the *_scripts/[provider]-repackage-box.sh* script.
 
+### Parallels
+
+You can use the *_scripts/parallels-repackage-box.sh* script.
+
+
 ### Import the box
 
   $ vagrant box add --clean --force --name [boxname you will include in Vagrantfile] [box/file/path.box]
@@ -193,7 +207,9 @@ if you have a Vagrantfile with **config.vm.box = "[boxname you will include in V
 
 ### Vagrantfile
 
-It seems that headless mode is not properly supported yet. You'll have to enable
+**VirtualBox:**
+
+It seems that headless mode is not properly supported yet in VirtualBox. You'll have to enable
 the GUI in your Vagrantfile:
 
   config.vm.provider "virtualbox" do |vb|

@@ -3,4 +3,4 @@
 #vagrant ansible_ssh_port=2222 ansible_ssh_host=127.0.0.1
 
 # for Parallels something like this
-vagrant ansible_ssh_host=10.211.55.35
+vagrant ansible_ssh_host=10.211.55.36
