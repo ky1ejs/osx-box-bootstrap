@@ -190,7 +190,7 @@
         mode=0700
     ## step_agent
     - name: setup .step_agent
-      copy: src=step-agent/bin/step_agent_osx
+      copy: src=step-agent/_bin/step_agent_osx
         dest="/Users/{{ param_user }}/.step_agent"
         owner="{{ param_user }}"
         mode=0700
