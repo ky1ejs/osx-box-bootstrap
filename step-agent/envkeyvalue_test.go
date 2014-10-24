@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/base64"
+	"os"
 	"strings"
 	"testing"
 )
@@ -106,6 +107,46 @@ func Test_decodeEnvKeyValuePair(t *testing.T) {
 	}
 	if keyVal.Key != "a" || keyVal.Value != "a" {
 		t.Errorf("both the value and the key should be 'a'.\n Key: %s\n Value: %s", keyVal.Key, keyVal.Value)
+	}
+
+	keyVal, err = decodeEnvKeyValuePair(encodedStr_a + "." + encodedStr_a + "." + "true")
+	if err != nil {
+		t.Error("error returned: ", err)
+	}
+	if !keyVal.IsExpand {
+		t.Errorf("IsExpand should be true.\n %#v", keyVal)
+	}
+
+	keyVal, err = decodeEnvKeyValuePair(encodedStr_a + "." + encodedStr_a + "." + "false")
+	if err != nil {
+		t.Error("error returned: ", err)
+	}
+	if keyVal.IsExpand {
+		t.Errorf("IsExpand should be false.\n %#v", keyVal)
+	}
+}
+
+func Test_ToEnvironmentString(t *testing.T) {
+	if err := os.Setenv("__TEST_KEY__Test_ToEnvironmentString", "TEST VALUE"); err != nil {
+		t.Error("Could not set the ENV")
+	}
+
+	envKeyValuePair := EnvKeyValuePair{
+		Key:      "key",
+		Value:    "Some ${__TEST_KEY__Test_ToEnvironmentString} value",
+		IsExpand: true,
+	}
+	res := envKeyValuePair.ToEnvironmentString()
+	expectedEnvString := "key=Some TEST VALUE value"
+	if res != expectedEnvString {
+		t.Errorf("ToEnvironmentString result doesn't match.\n Expected: %s\n Got: %s", expectedEnvString, res)
+	}
+
+	envKeyValuePair.IsExpand = false
+	res = envKeyValuePair.ToEnvironmentString()
+	expectedEnvString = "key=Some ${__TEST_KEY__Test_ToEnvironmentString} value"
+	if res != expectedEnvString {
+		t.Errorf("ToEnvironmentString result doesn't match.\n Expected: %s\n Got: %s", expectedEnvString, res)
 	}
 }
 

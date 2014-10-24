@@ -9,21 +9,32 @@ import (
 )
 
 type EnvKeyValuePair struct {
-	Key   string
-	Value string
+	Key      string
+	Value    string
+	IsExpand bool
 }
 
-func (envKeyValPair *EnvKeyValuePair) String() string {
-	return envKeyValPair.Key + "=" + envKeyValPair.Value
+func (e EnvKeyValuePair) String() string {
+	return e.Key + "=" + e.Value
 }
 
-func (e *EnvKeyValuePair) ToStringWithExpand() string {
-	return fmt.Sprintf("%s=%s", e.Key, os.ExpandEnv(e.Value))
+//
+// ToEnvironmentString
+// Returns a string in the key=value format.
+//  Respects the EnvKeyValuePair's IsExpand setting,
+//		expands the value if it's true, does not expands it if it's false
+func (e EnvKeyValuePair) ToEnvironmentString() string {
+	theValue := e.Value
+	if e.IsExpand {
+		theValue = os.ExpandEnv(theValue)
+	}
+	return fmt.Sprintf("%s=%s", e.Key, theValue)
 }
 
 func decodeEnvKeyValuePair(combinedEncodedKeyValue string) (EnvKeyValuePair, error) {
 	encodedEnvPairComponents := strings.Split(combinedEncodedKeyValue, ".")
-	if len(encodedEnvPairComponents) != 2 {
+	envSplitComponentsLength := len(encodedEnvPairComponents)
+	if envSplitComponentsLength < 2 {
 		return EnvKeyValuePair{}, errors.New(fmt.Sprintf("Not a valid Environment key-value pair: %s", combinedEncodedKeyValue))
 	}
 
@@ -37,7 +48,12 @@ func decodeEnvKeyValuePair(combinedEncodedKeyValue string) (EnvKeyValuePair, err
 		return EnvKeyValuePair{}, err
 	}
 
-	return EnvKeyValuePair{Key: anEnvKey, Value: anEnvValue}, nil
+	isExpand := true
+	if envSplitComponentsLength == 3 && encodedEnvPairComponents[2] == "false" {
+		isExpand = false
+	}
+
+	return EnvKeyValuePair{Key: anEnvKey, Value: anEnvValue, IsExpand: isExpand}, nil
 }
 
 func decodeSingleValue(encodedContent string) (string, error) {
