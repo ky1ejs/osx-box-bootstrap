@@ -46,6 +46,7 @@ func transformIfSpecialEnv(envKeyValuePair EnvKeyValuePair) (EnvKeyValuePair, er
 			return EnvKeyValuePair{}, err
 		}
 		envKeyValuePair.Value = stepInputStoreFilePath
+		envKeyValuePair.IsExpand = false
 	}
 	return envKeyValuePair, nil
 }
@@ -83,12 +84,17 @@ func runStepWithAdditionalEnvironment(commandPath string, envsToAdd []EnvKeyValu
 	if envLength > 0 {
 		envStringPairs := make([]string, len(envsToAdd), len(envsToAdd))
 		for idx, aEnvPair := range envsToAdd {
-			envStringPairs[idx] = aEnvPair.ToStringWithExpand()
+			envStringPairs[idx] = aEnvPair.ToEnvironmentString()
 			// set as env, so subsequent expansions can use it
-			if err := os.Setenv(aEnvPair.Key, os.ExpandEnv(aEnvPair.Value)); err != nil {
+			envValue := aEnvPair.Value
+			if aEnvPair.IsExpand {
+				envValue = os.ExpandEnv(envValue)
+			}
+			if err := os.Setenv(aEnvPair.Key, envValue); err != nil {
 				fmt.Println(" [!] Failed to set Env: ", aEnvPair)
 			}
 		}
+		//
 		c.Env = append(os.Environ(), envStringPairs...)
 	}
 	c.Dir = commandDir
