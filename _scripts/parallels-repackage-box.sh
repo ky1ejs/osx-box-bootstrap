@@ -116,5 +116,5 @@ function fail_if_cmd_error {
 	print_and_do_command_exit_on_error cd "$parallels_pvm_dir"
 	echo "-> writing metadata to file: $metadata_file_content"
 	echo "$metadata_file_content" > metadata.json
-	print_and_do_command_exit_on_error tar cvzf concrete-worker.box ./$parallels_pvm_name ./metadata.json
+	print_and_do_command_exit_on_error tar cvzf concrete-worker-osx.box ./$parallels_pvm_name ./metadata.json
 )

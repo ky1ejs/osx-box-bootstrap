@@ -133,9 +133,10 @@
     # Install and setup RVM with Ruby
     - name: run RVM installer script
       script: installers/install_rvm.sh creates=/Users/{{ param_user }}/.rvm/bin/rvm
-    - command: rvm install ruby-2.1.3
-    - command: rvm install ruby-2.1.2
-    - shell: bash --login -c "rvm use 2.1.3 --default"
+    - command: rvm install ruby-2.1.4 --disable-binary
+    - command: rvm install ruby-2.1.3 --disable-binary
+    - command: rvm install ruby-2.1.2 --disable-binary
+    - shell: bash --login -c "rvm use 2.1.4 --default"
     - command: rvm osx-ssl-certs update all
     - shell: sudo gem update --system
     - shell: bash --login -c "gem update"

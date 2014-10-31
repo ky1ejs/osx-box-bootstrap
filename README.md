@@ -96,6 +96,12 @@ You can install it on your host OS with Homebrew:
 
 You can find the docs at [http://docs.ansible.com/](http://docs.ansible.com/)
 
+**Update the included components in this repository:**
+
+To update the dependencies of this repository you have to install [DepMan](https://github.com/viktorbenei/depman), then in this folder:
+
+  $ depman update  
+
 Run the *setup_playbook.yml* with ansible:
 
   $ ansible-playbook -e bitrise_box_version=[box-version, example: r2p3] --private-key ~/.vagrant.d/insecure_private_key -i hosts setup_playbook.yml
