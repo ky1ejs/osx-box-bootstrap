@@ -81,6 +81,11 @@
         # UseDNS no -> for better speed
         - { regexp: '^UseDNS yes', line: '', state: "absent" }
         - { regexp: '^UseDNS no', line: 'UseDNS no', state: "present" }
+    - name: ssh connection config (user specific)
+      copy: src=setupfiles/ssh-config
+        dest="/Users/{{ param_user }}/.ssh/config"
+        owner="{{ param_user }}"
+        mode=0600
 
     #
     # Setup profiles
