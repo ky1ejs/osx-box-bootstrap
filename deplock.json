@@ -2,11 +2,11 @@
 	"dep_locks": [
 		{
 			"url": "https://github.com/bitrise-io/steps-git-clone.git",
-			"revision": "0f93b77d80cd15b32af460652224f0d1b5a0aad4"
+			"revision": "339b471bef2a4cdc71b025896ab2b3a767db4a35"
 		},
 		{
 			"url": "https://github.com/bitrise-io/step-agent-go.git",
-			"revision": "87e638141bf4a0747836db76714c47ac106d0b7d"
+			"revision": "4ffecc9df338c209aa164ade3be5c38dde7bd069"
 		}
 	]
 }

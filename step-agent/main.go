@@ -78,7 +78,7 @@ func filterEnvironmentKeyValuePairs(envKeyValuePair []EnvKeyValuePair) []EnvKeyV
 func runStepWithAdditionalEnvironment(commandPath string, envsToAdd []EnvKeyValuePair) error {
 	commandDir := filepath.Dir(commandPath)
 	commandName := filepath.Base(commandPath)
-	c := exec.Command("bash", commandName)
+	c := exec.Command("bash", "-l", commandName)
 
 	envLength := len(envsToAdd)
 	if envLength > 0 {
