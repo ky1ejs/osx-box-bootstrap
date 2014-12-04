@@ -57,6 +57,7 @@ the password should be *vagrant* too.
   * after install run it at least once
   * open Organizer and Enable Developer Mode for the Mac
     * or run: $ sudo DevToolsSecurity -enable
+    * Xcode 6: this GUI option is removed from Xcode 6, you'll have to manually call `$ DevToolsSecurity -enable` from the Terminal, inside the VM (will present a popup)
   * install all the available SDKs and iOS Simulators (or the ones you want to use)
     * Xcode -> Preferences -> Downloads -> Components
   * open the iOS Simulator from Xcode -> Open Developer Tools (in the statusbar menu) -> iOS Simulator
@@ -81,6 +82,16 @@ Virtual Machine menu - Configure:
   * Advanced: don't share the clipboard
 * Security
   * enable Isolate Mac from virtual machine (disables shared folders, clipboard sharing, etc.)
+
+
+**Performance notes:**
+
+This is what hardware settings we use:
+
+* CPU: 2
+* RAM: 3072 MB
+* Video RAM (VRAM): 128 MB
+
 
 ## Auto setup
 
