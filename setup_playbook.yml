@@ -120,15 +120,15 @@
       shell: brew doctor
       when: is_incremental_setup|default(false) == false
     # brew some commands
-    - homebrew: name=git state=latest
-    - homebrew: name=wget state=latest
-    - homebrew: name=mercurial state=latest
-    - homebrew: name=xctool state=latest
-    - homebrew: name=node state=latest
-    - homebrew: name=ansible state=latest
+    - homebrew: name=git state=present
+    - homebrew: name=wget state=present
+    - homebrew: name=mercurial state=present
+    - homebrew: name=xctool state=present
+    - homebrew: name=node state=present
+    - homebrew: name=ansible state=present
     ## Go
     # Gopath is $HOME/go
-    - homebrew: name=go state=latest
+    - homebrew: name=go state=present
     - file: path="/Users/{{ param_user }}/go/{{ item.fold_path }}"
         state=directory
         owner="{{ param_user }}"
