@@ -20,12 +20,16 @@
   bitrise_tools_dir="${HOME}/bitrise/tools"
   xcuserver_base_dir="${bitrise_tools_dir}/xcuserver"
   xcuserver_install_script_path="${xcuserver_base_dir}/_scripts/install_launchctl_plist_for_current_user.sh"
+  CONFIG_xcuserver_git_repo_url="https://github.com/bitrise-io/xcodebuild-unittest-miniserver.git"
+  CONFIG_xcuserver_git_version_tag="1.1.0"
 
   echo " (i) xcuserver_base_dir: ${xcuserver_base_dir}"
   echo " (i) xcuserver_install_script_path: ${xcuserver_install_script_path}"
+  echo " (i) CONFIG_xcuserver_git_repo_url: ${CONFIG_xcuserver_git_repo_url}"
+  echo " (i) CONFIG_xcuserver_git_version_tag: ${CONFIG_xcuserver_git_version_tag}"
 
   print_and_do_command_exit_on_error mkdir -p "${bitrise_tools_dir}"
-  print_and_do_command_exit_on_error git clone https://github.com/bitrise-io/xcodebuild-unittest-miniserver.git "${xcuserver_base_dir}"
+  print_and_do_command_exit_on_error git clone --single-branch -b "${CONFIG_xcuserver_git_version_tag}" "${CONFIG_xcuserver_git_repo_url}" "${xcuserver_base_dir}"
   print_and_do_command_exit_on_error bash "${xcuserver_install_script_path}"
 
   echo " (i) XCUServer Success"
