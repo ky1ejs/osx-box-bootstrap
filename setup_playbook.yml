@@ -183,7 +183,7 @@
     #
     # Install XCUServer
     - name: run XCUServer installer script
-      script: installers/install_xcuserver.sh creates=/Users/{{ param_user }}/Library/LaunchAgents/bitrise.tools.osx.xcuserver.plist
+      script: installers/install_xcuserver.sh
 
     - name: setup Desktop/box-info.json
       template: src=setupfiles/box-info.json.template
