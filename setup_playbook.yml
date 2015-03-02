@@ -39,7 +39,7 @@
 
     #
     # Switch to Xcode 6, for brew-ing
-    - shell: bash --login -c "sudo xcode-select --switch /Applications/Xcodes/Xcode6.app/Contents/Developer"
+    - shell: bash --login -c "sudo xcode-select --switch /Applications/Xcodes/Xcode-stable.app/Contents/Developer"
 
     #
     # SSH config
@@ -142,9 +142,6 @@
     - name: run RVM installer script
       script: installers/install_rvm.sh creates=/Users/{{ param_user }}/.rvm/bin/rvm
     - shell: bash --login -c "rvm install ruby-2.1.5 --disable-binary"
-    - shell: bash --login -c "rvm install ruby-2.1.4 --disable-binary"
-    - shell: bash --login -c "rvm install ruby-2.1.3 --disable-binary"
-    - shell: bash --login -c "rvm install ruby-2.1.2 --disable-binary"
     - shell: bash --login -c "rvm use 2.1.5 --default"
     - command: rvm osx-ssl-certs update all
     - shell: bash --login -c "gem update"
@@ -219,7 +216,7 @@
 
     #
     # Switch to Xcode 6, the default Xcode for building
-    - shell: bash --login -c "sudo xcode-select --switch /Applications/Xcodes/Xcode6.app/Contents/Developer"
+    - shell: bash --login -c "sudo xcode-select --switch /Applications/Xcodes/Xcode-stable.app/Contents/Developer"
 
     #
     # Final debug prints

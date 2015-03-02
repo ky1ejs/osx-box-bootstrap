@@ -34,12 +34,12 @@ the password should be *vagrant* too.
 
 ## Manual setup steps
 
-* install OS X updates (for 10.9 Mavericks - don't upgrade to 10.10, it's not yet supported by Bitrise)
+* install OS X updates
 * enable SSH : System Preferences / Sharing / Remote Login: enable
 * for vagrant specific setup guide you can check these official guides:
   * [https://docs.vagrantup.com/v2/virtualbox/boxes.html](https://docs.vagrantup.com/v2/virtualbox/boxes.html)
   * [https://docs.vagrantup.com/v2/boxes/base.html](https://docs.vagrantup.com/v2/boxes/base.html)
-  * include vagrant's insecure public key in the ~/.ssh/authorized_keys file!
+  //* include vagrant's insecure public key in the ~/.ssh/authorized_keys file!
 //
 // This will be handled by the Ansible playbook:
 //* set the user (vagrant) to don’t require password to sudo
@@ -62,6 +62,7 @@ the password should be *vagrant* too.
     * Xcode -> Preferences -> Downloads -> Components
   * open the iOS Simulator from Xcode -> Open Developer Tools (in the statusbar menu) -> iOS Simulator
     and validate that it works
+  * also: create a test project, build & run unit tests; then remove it
   * Bitrise specific note: download and setup all the required
     Xcode versions as specified in the Bitrise Dev Center
     [Xcode version support guideline](http://devcenter.bitrise.io/docs/xcode-version-support.html)
@@ -111,11 +112,15 @@ You can find the docs at [http://docs.ansible.com/](http://docs.ansible.com/)
 
 To update the dependencies of this repository you have to install [DepMan](https://github.com/viktorbenei/depman), then in this folder:
 
-  $ depman update  
+  $ depman update
 
 Run the *setup_playbook.yml* with ansible:
 
   $ ansible-playbook -e bitrise_box_version=[box-version, example: r2p3] --private-key ~/.vagrant.d/insecure_private_key -i hosts setup_playbook.yml
+
+Or without an inventory file (using IP directly):
+
+  $ ansible-playbook all -e bitrise_box_version=[box-version, example: r2p3] --private-key ~/.vagrant.d/insecure_private_key -i IP_ADD_HERE, setup_playbook.yml
 
 Or instead of specifying --private-key you can:
 
