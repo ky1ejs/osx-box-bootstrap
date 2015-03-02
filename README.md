@@ -120,7 +120,7 @@ Run the *setup_playbook.yml* with ansible:
 
 Or without an inventory file (using IP directly):
 
-  $ ansible-playbook all -e bitrise_box_version=[box-version, example: r2p3] --private-key ~/.vagrant.d/insecure_private_key -i IP_ADD_HERE, setup_playbook.yml
+  $ ansible-playbook -e bitrise_box_version=[box-version, example: r2p3] --private-key ~/.vagrant.d/insecure_private_key -i IP_ADD_HERE, setup_playbook.yml
 
 Or instead of specifying --private-key you can:
 
