@@ -39,7 +39,7 @@
 
     #
     # Switch to Xcode 6, for brew-ing
-    - shell: bash --login -c "sudo xcode-select --switch /Applications/Xcodes/Xcode-stable.app/Contents/Developer"
+    - shell: bash -l -c "sudo xcode-select --switch /Applications/Xcodes/Xcode-stable.app/Contents/Developer"
 
     #
     # SSH config
@@ -141,15 +141,17 @@
     # Install and setup RVM with Ruby
     - name: run RVM installer script
       script: installers/install_rvm.sh creates=/Users/{{ param_user }}/.rvm/bin/rvm
-    - shell: bash --login -c "rvm install ruby-2.1.5 --disable-binary"
-    - shell: bash --login -c "rvm use 2.1.5 --default"
+    - shell: bash -l -c "rvm install ruby-2.1.5 --disable-binary"
+    - shell: bash -l -c "rvm use 2.1.5 --default"
+    - shell: bash -l -c "gem install bundler"
+    - shell: bash -l -c "bundle --version"
     - command: rvm osx-ssl-certs update all
-    - shell: bash --login -c "gem update"
+    - shell: bash -l -c "gem update"
     # GEMs: Cocoapods
-    - shell: bash --login -c "gem install cocoapods"
-    - shell: bash --login -c "pod setup"
+    - shell: bash -l -c "gem install cocoapods"
+    - shell: bash -l -c "pod setup"
     # GEMs: Nomad-CLI
-    - shell: bash --login -c "gem install nomad-cli"
+    - shell: bash -l -c "gem install nomad-cli"
 
     #
     # Setup Bitrise specific folders
@@ -216,7 +218,7 @@
 
     #
     # Switch to Xcode 6, the default Xcode for building
-    - shell: bash --login -c "sudo xcode-select --switch /Applications/Xcodes/Xcode-stable.app/Contents/Developer"
+    - shell: bash -l -c "sudo xcode-select --switch /Applications/Xcodes/Xcode-stable.app/Contents/Developer"
 
     #
     # Final debug prints
