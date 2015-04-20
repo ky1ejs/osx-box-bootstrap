@@ -12,6 +12,11 @@ Bitrise OS X Virtual Machine bootstrap scripts.
 > so it can be used for building through Bitrise right after the provision.
 
 
+# ToDo
+
+* `XCUServer` is now **deprecated** will be removed, `cmd-bridge` should be used instead
+
+
 # Dependency management
 
 We use [DepMan](https://github.com/viktorbenei/depman) to manage
@@ -90,8 +95,8 @@ Virtual Machine menu - Configure:
 This is what hardware settings we use:
 
 * CPU: 2
-* RAM: 3072 MB
-* Video RAM (VRAM): 128 MB
+* RAM: 4096 MB
+* Video RAM (VRAM): 32 MB
 
 
 ## Auto setup

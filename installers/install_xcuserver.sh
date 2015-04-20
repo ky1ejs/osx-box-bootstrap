@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 (
 
   function print_and_do_command {

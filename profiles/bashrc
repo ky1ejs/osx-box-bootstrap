@@ -6,8 +6,11 @@ export LC_ALL="en_US.UTF-8"
 export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 export GOPATH="$HOME/go"
 
-# Bitrise step connection Environment Variables
-[[ -s "$HOME/.bitrise_profile" ]] && source "$HOME/.bitrise_profile"
+# StepLib environments
+[[ -s "$HOME/.profiles/steplib_profile" ]] && source "$HOME/.profiles/steplib_profile"
+
+# Bitrise environments
+[[ -s "$HOME/.profiles/bitrise_profile" ]] && source "$HOME/.profiles/bitrise_profile"
 
 # keep a newline at the end of this file
 

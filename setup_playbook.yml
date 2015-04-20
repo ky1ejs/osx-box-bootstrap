@@ -90,9 +90,19 @@
 
     #
     # Setup profiles
-    - name: setup .bitrise_profile
+    - name: ensure .profiles folder is ok
+      file: path=/Users/{{ param_user }}/.profiles
+        state=directory
+        owner="{{ param_user }}"
+        mode=0700
+    - name: setup steplib_profile
+      copy: src=profiles/steplib_profile
+        dest="/Users/{{ param_user }}/.profiles/steplib_profile"
+        owner="{{ param_user }}"
+        mode=0600
+    - name: setup bitrise_profile
       copy: src=profiles/bitrise_profile
-        dest="/Users/{{ param_user }}/.bitrise_profile"
+        dest="/Users/{{ param_user }}/.profiles/bitrise_profile"
         owner="{{ param_user }}"
         mode=0600
     - name: setup .bashrc
@@ -183,6 +193,11 @@
     # Install XCUServer
     - name: run XCUServer installer script
       script: installers/install_xcuserver.sh
+    #
+    # Install cmd-bridge
+    - synchronize: src=tools/cmd-bridge/ dest="/Users/{{ param_user }}/bitrise/tools/cmd-bridge/"
+    - name: run cmd-bridge installer script
+      script: installers/install_cmd-bridge.sh
 
     - name: setup Desktop/box-info.json
       template: src=setupfiles/box-info.json.template
