@@ -7,6 +7,10 @@
 		{
 			"url": "https://github.com/bitrise-io/step-agent-go.git",
 			"revision": "c0eb697f8a94848e78694ab0311c4bcabd5bad93"
+		},
+		{
+			"url": "https://github.com/bitrise-io/cmd-bridge.git",
+			"revision": "9d24c2ede0952fbb4e3f4ea5478941f6e3d2bbbf"
 		}
 	]
 }

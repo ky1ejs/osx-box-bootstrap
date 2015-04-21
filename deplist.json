@@ -7,6 +7,10 @@
 		{
 			"url": "https://github.com/bitrise-io/step-agent-go.git",
 			"store_path": "step-agent"
+		},
+		{
+			"url": "https://github.com/bitrise-io/cmd-bridge.git",
+			"store_path": "tools/cmd-bridge"
 		}
 	]
 }
