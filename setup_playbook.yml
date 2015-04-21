@@ -151,7 +151,12 @@
     # Install and setup RVM with Ruby
     - name: run RVM installer script
       script: installers/install_rvm.sh creates=/Users/{{ param_user }}/.rvm/bin/rvm
+    # Pre-installed rubies
     - shell: bash -l -c "rvm install ruby-2.1.5 --disable-binary"
+    - shell: bash -l -c "rvm install ruby-2.1.6 --disable-binary"
+    - shell: bash -l -c "rvm install ruby-2.2.2 --disable-binary"
+    # Default ruby version
+    #  and pre-installed gems for this version
     - shell: bash -l -c "rvm use 2.1.5 --default"
     - shell: bash -l -c "gem install bundler"
     - shell: bash -l -c "bundle --version"
