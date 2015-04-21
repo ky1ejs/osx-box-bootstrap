@@ -10,10 +10,6 @@ import (
 // ------------------------
 // --- Helpers
 
-func encodeSingleValue(valueToEncode string) string {
-	return base64.StdEncoding.EncodeToString([]byte(valueToEncode))
-}
-
 func encodeAndCombineEnvs(envsToEncode []EnvKeyValuePair) string {
 	encodedCombinedEnvPairs := make([]string, len(envsToEncode), len(envsToEncode))
 
@@ -126,7 +122,7 @@ func Test_decodeEnvKeyValuePair(t *testing.T) {
 	}
 }
 
-func Test_ToEnvironmentString(t *testing.T) {
+func Test_ToExpandedEnvironmentString(t *testing.T) {
 	if err := os.Setenv("__TEST_KEY__Test_ToEnvironmentString", "TEST VALUE"); err != nil {
 		t.Error("Could not set the ENV")
 	}
@@ -136,17 +132,17 @@ func Test_ToEnvironmentString(t *testing.T) {
 		Value:    "Some ${__TEST_KEY__Test_ToEnvironmentString} value",
 		IsExpand: true,
 	}
-	res := envKeyValuePair.ToEnvironmentString()
+	res := envKeyValuePair.ToExpandedEnvironmentString()
 	expectedEnvString := "key=Some TEST VALUE value"
 	if res != expectedEnvString {
-		t.Errorf("ToEnvironmentString result doesn't match.\n Expected: %s\n Got: %s", expectedEnvString, res)
+		t.Errorf("ToExpandedEnvironmentString result doesn't match.\n Expected: %s\n Got: %s", expectedEnvString, res)
 	}
 
 	envKeyValuePair.IsExpand = false
-	res = envKeyValuePair.ToEnvironmentString()
+	res = envKeyValuePair.ToExpandedEnvironmentString()
 	expectedEnvString = "key=Some ${__TEST_KEY__Test_ToEnvironmentString} value"
 	if res != expectedEnvString {
-		t.Errorf("ToEnvironmentString result doesn't match.\n Expected: %s\n Got: %s", expectedEnvString, res)
+		t.Errorf("ToExpandedEnvironmentString result doesn't match.\n Expected: %s\n Got: %s", expectedEnvString, res)
 	}
 }
 

@@ -23,12 +23,17 @@ func (e EnvKeyValuePair) String() string {
 // Returns a string in the key=value format.
 //  Respects the EnvKeyValuePair's IsExpand setting,
 //		expands the value if it's true, does not expands it if it's false
-func (e EnvKeyValuePair) ToEnvironmentString() string {
+func (e EnvKeyValuePair) ToExpandedEnvironmentString() string {
+	theValue := e.ExpanedValue()
+	return fmt.Sprintf("%s=%s", e.Key, theValue)
+}
+
+func (e EnvKeyValuePair) ExpanedValue() string {
 	theValue := e.Value
 	if e.IsExpand {
 		theValue = os.ExpandEnv(theValue)
 	}
-	return fmt.Sprintf("%s=%s", e.Key, theValue)
+	return theValue
 }
 
 func decodeEnvKeyValuePair(combinedEncodedKeyValue string) (EnvKeyValuePair, error) {
@@ -64,6 +69,10 @@ func decodeSingleValue(encodedContent string) (string, error) {
 	}
 
 	return string(bytes), nil
+}
+
+func encodeSingleValue(valueToEncode string) string {
+	return base64.StdEncoding.EncodeToString([]byte(valueToEncode))
 }
 
 // decodeCombinedEnvs decodes the combined envs

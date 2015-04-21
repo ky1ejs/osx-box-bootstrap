@@ -78,28 +78,41 @@ func filterEnvironmentKeyValuePairs(envKeyValuePair []EnvKeyValuePair) []EnvKeyV
 func runStepWithAdditionalEnvironment(commandPath string, envsToAdd []EnvKeyValuePair) error {
 	commandDir := filepath.Dir(commandPath)
 	commandName := filepath.Base(commandPath)
-	c := exec.Command("bash", "-l", commandName)
+
+	cmdBridgeToolPath := os.Getenv("BITRISE_TOOLS_CMD_BRIDGE_PATH")
+	var c *exec.Cmd
+	if cmdBridgeToolPath != "" {
+		c = exec.Command(cmdBridgeToolPath, "-do", "bash -l "+commandName, "-workdir", commandDir)
+	} else {
+		c = exec.Command("bash", "-l", commandName)
+		c.Dir = commandDir
+	}
 
 	envLength := len(envsToAdd)
 	if envLength > 0 {
+		originalOsEnvs := os.Environ()
 		envStringPairs := make([]string, len(envsToAdd), len(envsToAdd))
 		for idx, aEnvPair := range envsToAdd {
-			envStringPairs[idx] = aEnvPair.ToEnvironmentString()
-			// set as env, so subsequent expansions can use it
-			envValue := aEnvPair.Value
-			if aEnvPair.IsExpand {
-				envValue = os.ExpandEnv(envValue)
+			aEnvStringPair := aEnvPair.ToExpandedEnvironmentString()
+			if cmdBridgeToolPath != "" {
+				envStringPairs[idx] = fmt.Sprintf("_CMDENV__%s", aEnvStringPair)
+			} else {
+				envStringPairs[idx] = aEnvStringPair
 			}
-			if err := os.Setenv(aEnvPair.Key, envValue); err != nil {
+			// set as env, so subsequent expansions can use it
+			envExpandedValue := aEnvPair.ExpanedValue()
+			if err := os.Setenv(aEnvPair.Key, envExpandedValue); err != nil {
 				fmt.Println(" [!] Failed to set Env: ", aEnvPair)
 			}
 		}
 		//
-		c.Env = append(os.Environ(), envStringPairs...)
+		c.Env = append(originalOsEnvs, envStringPairs...)
 	}
-	c.Dir = commandDir
 	c.Stdout = os.Stdout
 	c.Stderr = os.Stderr
+	if Config_IsVerboseLogMode {
+		log.Printf("Full Command: %#v\n", c)
+	}
 	if err := c.Run(); err != nil {
 		return err
 	}
@@ -133,7 +146,9 @@ func perform(encodedStepPath, encodedCombinedStepEnvs string) error {
 
 	filteredEnvPairs := filterEnvironmentKeyValuePairs(decodedStepEnvPairs)
 
-	fmt.Println("Perform: ", decodedStepCommand, filteredEnvPairs)
+	if Config_IsVerboseLogMode {
+		fmt.Println("Perform: ", decodedStepCommand, filteredEnvPairs)
+	}
 	return runStepWithAdditionalEnvironment(decodedStepCommand, filteredEnvPairs)
 }
 
@@ -146,12 +161,27 @@ func main() {
 	var (
 		flagEncodedStepPath         = flag.String("steppath", "", "[REQUIRED] step's path (base64 encoded)")
 		flagEncodedCombinedStepEnvs = flag.String("stepenvs", "", "[REQUIRED] step's encoded-combined environment key-value pairs")
+		flagEncode                  = flag.String("encode", "", "If no step provided the value of this flag will be printed in base64 encoded form.")
+		flagIsVerbose               = flag.Bool("verbose", false, "Verbose logging?")
+		flagIsVersion               = flag.Bool("version", false, "Print version information")
 	)
 
 	flag.Usage = usage
 	flag.Parse()
 
+	if *flagIsVersion {
+		fmt.Println(VersionString)
+		os.Exit(0)
+	}
+
+	Config_IsVerboseLogMode = *flagIsVerbose
+
 	if *flagEncodedStepPath == "" {
+		if *flagEncode != "" {
+			encString := encodeSingleValue(*flagEncode)
+			fmt.Println(encString)
+			os.Exit(0)
+		}
 		flag.Usage()
 		os.Exit(1)
 	}

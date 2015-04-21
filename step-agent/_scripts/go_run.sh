@@ -1,4 +1,4 @@
 #!/bin/bash
 
 go build
-./step-agent-go $@
+./step-agent-go "$@"

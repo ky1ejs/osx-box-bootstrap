@@ -1,6 +1,7 @@
 package main
 
 import (
+	"path/filepath"
 	"testing"
 )
 
@@ -15,16 +16,19 @@ func Test_perform(t *testing.T) {
 		t.Error("No error returned - should return an error for empty step-path!")
 	}
 
-	if err := perform(encodeSingleValue("./_testfiles/step_to_succeed.sh"), ""); err != nil {
+	testScriptAbsPath, _ := filepath.Abs("./_testfiles/step_to_succeed.sh")
+	if err := perform(encodeSingleValue(testScriptAbsPath), ""); err != nil {
 		t.Error("returned error: ", err)
 	}
 
-	if err := perform(encodeSingleValue("./_testfiles/step_to_fail.sh"), ""); err == nil {
+	testScriptAbsPath, _ = filepath.Abs("./_testfiles/step_to_fail.sh")
+	if err := perform(encodeSingleValue(testScriptAbsPath), ""); err == nil {
 		t.Error("should return an error")
 	}
 
 	// should call the step from the step's directory!
-	if err := perform(encodeSingleValue("./_testfiles/step_ref_another_one.sh"), ""); err != nil {
+	testScriptAbsPath, _ = filepath.Abs("./_testfiles/step_ref_another_one.sh")
+	if err := perform(encodeSingleValue(testScriptAbsPath), ""); err != nil {
 		t.Error("working dir should be the step's dir! - error returned: ", err)
 	}
 
