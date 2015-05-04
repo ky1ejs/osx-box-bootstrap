@@ -73,8 +73,8 @@ function print_and_do_command_exit_on_error {
 }
 
 function fail_if_cmd_error {
-	err_msg=$1
 	last_cmd_result=$?
+	err_msg=$1
 	if [ ${last_cmd_result} -ne 0 ]; then
 		echo "${err_msg}"
 		exit ${last_cmd_result}
@@ -100,7 +100,7 @@ function fail_if_cmd_error {
 	echo
 
 	print_and_do_command_exit_on_error vagrant halt
-	print_and_do_command_exit_on_error sleep 20
+	print_and_do_command_exit_on_error sleep 30
 )
 fail_if_cmd_error "Failed to prepare the VM for packaging"
 
