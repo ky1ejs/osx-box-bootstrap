@@ -91,13 +91,13 @@ func runStepWithAdditionalEnvironment(commandPath string, envsToAdd []EnvKeyValu
 	envLength := len(envsToAdd)
 	if envLength > 0 {
 		originalOsEnvs := os.Environ()
-		envStringPairs := make([]string, len(envsToAdd), len(envsToAdd))
-		for idx, aEnvPair := range envsToAdd {
+		var envStringPairs = map[string]string{}
+		for _, aEnvPair := range envsToAdd {
 			aEnvStringPair := aEnvPair.ToExpandedEnvironmentString()
 			if cmdBridgeToolPath != "" {
-				envStringPairs[idx] = fmt.Sprintf("_CMDENV__%s", aEnvStringPair)
+				envStringPairs[aEnvPair.Key] = fmt.Sprintf("_CMDENV__%s", aEnvStringPair)
 			} else {
-				envStringPairs[idx] = aEnvStringPair
+				envStringPairs[aEnvPair.Key] = aEnvStringPair
 			}
 			// set as env, so subsequent expansions can use it
 			envExpandedValue := aEnvPair.ExpanedValue()
@@ -105,8 +105,13 @@ func runStepWithAdditionalEnvironment(commandPath string, envsToAdd []EnvKeyValu
 				fmt.Println(" [!] Failed to set Env: ", aEnvPair)
 			}
 		}
-		//
-		c.Env = append(originalOsEnvs, envStringPairs...)
+		// collect unique values
+		var filteredEnvsList = make([]string, len(envStringPairs), len(envStringPairs))
+		for _, v := range envStringPairs {
+			filteredEnvsList = append(filteredEnvsList, v)
+		}
+		// append to original ENVs
+		c.Env = append(originalOsEnvs, filteredEnvsList...)
 	}
 	c.Stdout = os.Stdout
 	c.Stderr = os.Stderr
