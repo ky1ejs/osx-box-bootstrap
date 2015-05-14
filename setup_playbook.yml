@@ -136,6 +136,7 @@
     - homebrew: name=xctool state=present
     - homebrew: name=node state=present
     - homebrew: name=ansible state=present
+    - homebrew: name=coreutils state=present
     ## Go
     # Gopath is $HOME/go
     - homebrew: name=go state=present
@@ -159,14 +160,19 @@
     #  and pre-installed gems for this version
     - shell: bash -l -c "rvm use 2.1.5 --default"
     - shell: bash -l -c "gem install bundler"
+      when: is_incremental_setup|default(false) == false
     - shell: bash -l -c "bundle --version"
     - command: rvm osx-ssl-certs update all
     - shell: bash -l -c "gem update"
+      when: is_incremental_setup|default(false) == false
     # GEMs: Cocoapods
     - shell: bash -l -c "gem install cocoapods"
+      when: is_incremental_setup|default(false) == false
     - shell: bash -l -c "pod setup"
+      when: is_incremental_setup|default(false) == false
     # GEMs: Nomad-CLI
     - shell: bash -l -c "gem install nomad-cli"
+      when: is_incremental_setup|default(false) == false
 
     #
     # Setup Bitrise specific folders
