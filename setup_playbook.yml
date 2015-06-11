@@ -38,7 +38,7 @@
         validate='visudo -cf %s'"
 
     #
-    # Switch to Xcode 6, for brew-ing
+    # Switch to Xcode stable, for brew-ing
     - shell: bash -l -c "sudo xcode-select --switch /Applications/Xcodes/Xcode-stable.app/Contents/Developer"
 
     #
@@ -243,7 +243,7 @@
         mode=0700
 
     #
-    # Switch to Xcode 6, the default Xcode for building
+    # Switch to Xcode stable, the default Xcode for building
     - shell: bash -l -c "sudo xcode-select --switch /Applications/Xcodes/Xcode-stable.app/Contents/Developer"
 
     #
