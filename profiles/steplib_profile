@@ -15,4 +15,6 @@ export STEPLIB_OSX_SYM_ROOT="${HOME}/build"
 export STEPLIB_OSX_OBJ_ROOT="${HOME}/bin"
 export STEPLIB_OSX_LOGIN_KEYCHAIN_NAME="login.keychain"
 export STEPLIB_OSX_LOGIN_KEYCHAIN_PASSWORD="vagrant"
+# Continuous Integration
+export CI=true
 # keep a newline at the end of this file
