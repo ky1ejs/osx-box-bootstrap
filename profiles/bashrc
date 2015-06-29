@@ -5,6 +5,7 @@ export LC_ALL="en_US.UTF-8"
 # Go
 export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
 
 # StepLib environments
 [[ -s "$HOME/.profiles/steplib_profile" ]] && source "$HOME/.profiles/steplib_profile"
