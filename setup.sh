@@ -86,9 +86,6 @@ print_and_do_command_exit_on_error mkdir -p "$BITRISE_OBJ_ROOT"
 print_and_do_command_exit_on_error mkdir -p "$BITRISE_FOLDER_PATH"
 print_and_do_command_exit_on_error mkdir -p "$BITRISE_STEP_DATA_FOLDER_PATH"
 
-echo " (i) Install XCUServer (Xcode Unit Test Server)..."
-print_and_do_command_exit_on_error bash ../installers/install_xcuserver.sh
-
 
 echo " (i) Initialising box-info.json..."
 print_and_do_command_exit_on_error cp ./box-info.json ~/Desktop/box-info.json

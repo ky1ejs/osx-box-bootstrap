@@ -14,7 +14,7 @@ Bitrise OS X Virtual Machine bootstrap scripts.
 
 # ToDo
 
-* `XCUServer` is now **deprecated** will be removed, `cmd-bridge` should be used instead
+* `XCUServer` is now **removed**, `cmd-bridge` should be used instead
 
 
 # Dependency management
