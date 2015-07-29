@@ -200,6 +200,8 @@
         - { fold_path: 'bitrise' }
         # BITRISE_STEP_DATA_FOLDER_PATH
         - { fold_path: 'bitrise/stepdata' }
+        #
+        - { fold_path: 'bitrise/tools' }
     #
     # Install cmd-bridge
     - synchronize: src=tools/cmd-bridge/ dest="/Users/{{ param_user }}/bitrise/tools/cmd-bridge/"
