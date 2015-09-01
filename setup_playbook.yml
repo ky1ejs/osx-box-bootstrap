@@ -121,6 +121,9 @@
         owner="{{ param_user }}"
         mode=0600
 
+    # Turn off automatic update
+    - shell: sudo softwareupdate --schedule off
+
     #
     # Install and update homebrew
     - name: run brew installer script
@@ -207,6 +210,10 @@
     - synchronize: src=tools/cmd-bridge/ dest="/Users/{{ param_user }}/bitrise/tools/cmd-bridge/"
     - name: run cmd-bridge installer script
       script: installers/install_cmd-bridge.sh
+
+    # Install Bitrise CLI Stack Tools
+    - name: install Bitrise CLI Stack Tools
+      script: installers/install_bitrise_cli_stack_tools.sh
 
     - name: setup Desktop/box-info.json
       template: src=setupfiles/box-info.json.template
