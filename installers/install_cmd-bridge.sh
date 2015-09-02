@@ -4,8 +4,6 @@
   set -v
   set -e
 
-  THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
   bitrise_tools_dir="${HOME}/bitrise/tools"
   cmd_bridge_base_dir="${bitrise_tools_dir}/cmd-bridge"
   cmd_bridge_install_script_path="${cmd_bridge_base_dir}/_scripts/install_launchctl_plist_for_current_user.sh"
