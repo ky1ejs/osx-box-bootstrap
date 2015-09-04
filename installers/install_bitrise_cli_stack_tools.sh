@@ -17,6 +17,10 @@
 	echo "[bitrise] version"
 	bitrise --version
 
+	# setup the default StepLib collection to stepman, for a pre-warmed
+	#  cache for the StepLib
+	stepman setup -c https://github.com/bitrise-io/bitrise-steplib.git
+
 	# bitrise-bridge
 	echo
 	echo "[bitrise-bridge] Downloading..."
