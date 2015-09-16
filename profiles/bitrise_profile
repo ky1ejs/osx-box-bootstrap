@@ -10,6 +10,9 @@ export BITRISE_PROFILE_DIR="${HOME}/profiles"
 export BITRISE_SYM_ROOT="${HOME}/build"
 export BITRISE_OBJ_ROOT="${HOME}/bin"
 export BITRISE_KEYCHAIN="bitrise.keychain"
+#
+export BITRISE_KEYCHAIN_PASSWORD="vagrant"
+#
 export BITRISE_FOLDER_PATH="${HOME}/bitrise"
 export BITRISE_STEP_DATA_FOLDER_PATH="${BITRISE_FOLDER_PATH}/stepdata"
 export BITRISE_STEP_FORMATTED_OUTPUT_FILE_PATH="${BITRISE_STEP_DATA_FOLDER_PATH}/stepoutput"
@@ -18,6 +21,8 @@ export BITRISE_TOOLS_FOLDER_PATH="${BITRISE_FOLDER_PATH}/tools"
 export BITRISE_TOOLS_CMD_BRIDGE_PATH="${BITRISE_TOOLS_FOLDER_PATH}/cmd-bridge/bin/osx/cmd-bridge"
 # -> add cmd-bridge to PATH
 export PATH="$PATH:${BITRISE_TOOLS_FOLDER_PATH}/cmd-bridge/bin/osx"
+# -> bitrise-bridge
+export BITRISE_BRIDGE_WORKDIR="${BITRISE_SOURCE_DIR}"
 
 # Continuous Integration
 export CI=true
