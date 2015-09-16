@@ -229,23 +229,6 @@
         dest="/Users/{{ param_user }}/.bootstrap.sh"
         owner="{{ param_user }}"
         mode=0700
-    ## step_agent
-    - name: setup .step_agent
-      copy: src=step-agent/_bin/step_agent_osx
-        dest="/Users/{{ param_user }}/.step_agent"
-        owner="{{ param_user }}"
-        mode=0700
-    ## git_clone script and ssh no-prompt script
-    - name: setup ssh_no_prompt.sh
-      copy: src=steps-git-clone/ssh_no_prompt.sh
-        dest="/Users/{{ param_user }}/ssh_no_prompt.sh"
-        owner="{{ param_user }}"
-        mode=0700
-    - name: setup git_clone.rb
-      copy: src=steps-git-clone/git_clone.rb
-        dest="/Users/{{ param_user }}/git_clone.rb"
-        owner="{{ param_user }}"
-        mode=0700
 
     #
     # Switch to Xcode stable, the default Xcode for building
