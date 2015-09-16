@@ -244,7 +244,9 @@ func sendCommandToServer(cmdToSend CommandModel, isVerbose bool) (cmdExCode int,
 	}
 
 	t, err := tail.TailFile(tempFile.Name(), tail.Config{Follow: true})
-	defer tail.Cleanup()
+	if err != nil {
+		return 1, err
+	}
 	go func() {
 		cmdExCode, cmdErr = sendJSONRequestToServer(cmdBytes)
 		if err := t.Stop(); err != nil {
