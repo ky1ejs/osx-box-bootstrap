@@ -18,7 +18,7 @@ export BITRISE_STEP_DATA_FOLDER_PATH="${BITRISE_FOLDER_PATH}/stepdata"
 export BITRISE_STEP_FORMATTED_OUTPUT_FILE_PATH="${BITRISE_STEP_DATA_FOLDER_PATH}/stepoutput"
 ## Tools
 export BITRISE_TOOLS_FOLDER_PATH="${BITRISE_FOLDER_PATH}/tools"
-export BITRISE_TOOLS_CMD_BRIDGE_PATH="${BITRISE_TOOLS_FOLDER_PATH}/cmd-bridge/bin/osx/cmd-bridge"
+export BITRISE_TOOLS_CMD_BRIDGE_PATH="/usr/local/bin/cmd-bridge"
 # -> add cmd-bridge to PATH
 export PATH="$PATH:${BITRISE_TOOLS_FOLDER_PATH}/cmd-bridge/bin/osx"
 # -> bitrise-bridge
@@ -26,4 +26,5 @@ export BITRISE_BRIDGE_WORKDIR="${BITRISE_SOURCE_DIR}"
 
 # Continuous Integration
 export CI=true
+export BITRISE_IO=true
 # keep a newline at the end of this file
