@@ -2,7 +2,7 @@
 	"dep_locks": [
 		{
 			"url": "https://github.com/bitrise-io/cmd-bridge.git",
-			"revision": "fa307409a1df13ebabe140dbbb226c407a66748d"
+			"revision": "a4ea4a469dcd12bfc73413ceb89e77d41510a38a"
 		}
 	]
 }
