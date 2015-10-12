@@ -9,7 +9,7 @@
 	# bitrise
 	echo
 	echo "[bitrise] Downloading..."
-	curl -fL https://github.com/bitrise-io/bitrise/releases/download/1.2.0/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise
+	curl -fL https://github.com/bitrise-io/bitrise/releases/download/1.2.2/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise
 	echo "[bitrise] chmod"
 	chmod +x /usr/local/bin/bitrise
 	echo "[bitrise] setup"
