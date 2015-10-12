@@ -1,6 +1,7 @@
 export DOTBASHRC_LOADED=1
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
 
 # Go
 export PATH="$PATH:/usr/local/opt/go/libexec/bin"
