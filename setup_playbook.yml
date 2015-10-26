@@ -159,23 +159,24 @@
     - shell: bash -l -c "rvm install ruby-2.1.5 --disable-binary"
     - shell: bash -l -c "rvm install ruby-2.1.6 --disable-binary"
     - shell: bash -l -c "rvm install ruby-2.2.2 --disable-binary"
+    - shell: bash -l -c "rvm install ruby-2.2.3 --disable-binary"
     # Default ruby version
     #  and pre-installed gems for this version
-    - shell: bash -l -c "rvm use 2.1.5 --default"
-    - shell: bash -l -c "gem install bundler"
+    - shell: bash -l -c "rvm use 2.2.3 --default"
+    - shell: bash -l -c "rvm all do gem install --no-document bundler cocoapods nomad-cli rake xcpretty fastlane"
       when: is_incremental_setup|default(false) == false
     - shell: bash -l -c "bundle --version"
     - command: rvm osx-ssl-certs update all
     - shell: bash -l -c "gem update"
       when: is_incremental_setup|default(false) == false
     # GEMs: Cocoapods
-    - shell: bash -l -c "gem install cocoapods"
-      when: is_incremental_setup|default(false) == false
+    # - shell: bash -l -c "gem install cocoapods"
+    #   when: is_incremental_setup|default(false) == false
     - shell: bash -l -c "pod setup"
       when: is_incremental_setup|default(false) == false
     # GEMs: Nomad-CLI
-    - shell: bash -l -c "gem install nomad-cli"
-      when: is_incremental_setup|default(false) == false
+    # - shell: bash -l -c "gem install nomad-cli"
+    #   when: is_incremental_setup|default(false) == false
 
     #
     # Setup Bitrise specific folders
