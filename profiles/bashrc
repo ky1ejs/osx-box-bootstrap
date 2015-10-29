@@ -15,5 +15,3 @@ export PATH="$PATH:$GOPATH/bin"
 [[ -s "$HOME/.profiles/bitrise_profile" ]] && source "$HOME/.profiles/bitrise_profile"
 
 # keep a newline at the end of this file
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
