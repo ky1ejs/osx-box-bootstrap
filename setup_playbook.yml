@@ -157,7 +157,6 @@
     - shell: bash -l -c "gem install --no-document bundler cocoapods nomad-cli xcpretty fastlane"
       when: is_incremental_setup|default(false) == false
     - shell: bash -l -c "bundle --version"
-    - shell: bash -l -c "gem update"
       when: is_incremental_setup|default(false) == false
     # GEMs: Cocoapods
     - shell: bash -l -c "pod setup"
