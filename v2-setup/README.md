@@ -139,6 +139,9 @@ Once installed:
 ## Provisioning
 
 * For a base Vagrant specific setup use the `vagrant-setup-playbook.yml` - run it with `ansible`
+  * From another host:
+    * create a `hosts` file: `echo 'tmp ansible_ssh_host=IP-OF-BASE-VM' > hosts`
+    * run ansible: `ansible-playbook -i hosts --ask-pass vagrant-setup-playbook.yml`
 
 * Check the available OS X updates in the App Store (don't sign into the App Store!),
   and install the system updates.
