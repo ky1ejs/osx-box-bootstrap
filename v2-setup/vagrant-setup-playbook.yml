@@ -1,0 +1,31 @@
+---
+- hosts: all
+  # accelerate: true
+  remote_user: vagrant
+  vars:
+    - ansible_sudo_pass: vagrant
+    - param_user: vagrant
+  tasks:
+    #
+    # Add user to sudoers-no-password
+    #  don't require password for running sudo with this user
+    - name: "Add user {{ param_user }} to sudoers with no password"
+      sudo: yes
+      lineinfile: "dest=/etc/sudoers
+        regexp='^{{ param_user }} ALL'
+        line='{{ param_user }} ALL=(ALL) NOPASSWD: ALL'
+        state=present
+        validate='visudo -cf %s'"
+
+    #
+    # SSH config
+    - name: ensure .ssh folder is ok
+      file: path=/Users/{{ param_user }}/.ssh
+        state=directory
+        owner="{{ param_user }}"
+        mode=0700
+    - name: copy ssh key to remote's {{ param_user }} user
+      copy: src=setupfiles/authorized_keys
+        dest="/Users/{{ param_user }}/.ssh/authorized_keys"
+        owner="{{ param_user }}"
+        mode=0600
