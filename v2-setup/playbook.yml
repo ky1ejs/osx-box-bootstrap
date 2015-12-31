@@ -61,7 +61,7 @@
     #  allow only SSH key based SSH login
     - name: sshd_config settings
       sudo: yes
-      lineinfile: dest=/etc/sshd_config
+      lineinfile: dest=/etc/ssh/sshd_config
         regexp="{{ item.regexp }}"
         line="{{ item.line }}"
         state="{{ item.state }}"
@@ -197,9 +197,12 @@
         - { fold_path: 'bitrise/stepdata' }
         #
         - { fold_path: 'bitrise/tools' }
+
+    # Sync the tools/ dir
+    - synchronize: src=tools/ dest="/Users/{{ param_user }}/bitrise/tools/"
+
     #
     # Install cmd-bridge
-    - synchronize: src=tools/cmd-bridge/ dest="/Users/{{ param_user }}/bitrise/tools/cmd-bridge/"
     - name: run cmd-bridge installer script
       script: installers/install_cmd-bridge.sh
 

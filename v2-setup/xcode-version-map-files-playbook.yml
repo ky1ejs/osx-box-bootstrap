@@ -1,0 +1,26 @@
+#
+# DEPRECATED
+#  will be removed in the near future, as we don't pre-install multiple Xcode versions
+#  in the same VM anymore (mainly because of incompatibility issues).
+#
+---
+- hosts: all
+  # accelerate: true
+  remote_user: vagrant
+  user: vagrant
+  vars:
+    - ansible_sudo_pass: vagrant
+  tasks:
+    # version map files - in /Applications/Xcodes
+    - shell: |-
+        mkdir -p /Applications/Xcodes
+    - shell: |-
+        printf %s /Applications/Xcode.app > /Applications/Xcodes/{{item.version_map_file}}
+      with_items:
+        - { version_map_file: 'version-map--stable' }
+        - { version_map_file: 'version-map--beta' }
+        - { version_map_file: 'version-map--latest' }
+        # named releases
+        - { version_map_file: 'version-map-xcode-7' }
+        - { version_map_file: 'version-map-xcode-7-beta' }
+        - { version_map_file: 'version-map-xcode-6' }

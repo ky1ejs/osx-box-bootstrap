@@ -27,16 +27,17 @@ Table of Content:
 * Create a new OS X VM
   * 4 GB RAM
   * 2 CPU
-  * about 50 GB disk space
+  * about 60 GB disk space
 * Start the VM
 * Install OS X:
   * OS X won't see the hard drive, you'll have to open Disk Utility (you can
     find it in the menu bar of the OS X installer) and format the disk
-  * Select the 50 GB disk on the left side, and then Erase it
+  * Select the 60 GB disk on the left side, and then Erase it
   * Format: Mac OS Extended (Journaled)
   * Name: Macintosh HD
   * Clone Disk Utility, you should now be able to select this disk for the install.
   * Follow the: OS X Install guide (common) section
+* Wait for Spotlight indexing to finish
 * Shut down the VM and remove the OS X Installer ISO (cdrom)
 * Save it as a "vanilla box" (as a VM or even better, as a Template)
 * When preparing for a specific setup (e.g. Xcode version)
@@ -45,6 +46,7 @@ Table of Content:
   * double check the "Once installed:" section of "OS X Install guide (common) section"
     * in some cases OS X version update might turn off e.g. Remote Login!
   * install the VMware Tools
+  * check and wait if Spotlight is indexing
   * Save it as an environment specific "base box"
   * Continue with Provisioning
 
@@ -138,11 +140,43 @@ Once installed:
 
 ## Provisioning
 
+* To activate the vagrant insecure key, which will be used during the setup:
+  * If your ssh-agent is not running: `eval $(ssh-agent)`
+  * then: `ssh-add ./vagrant-insecure_private_key`
+
 * For a base Vagrant specific setup use the `vagrant-setup-playbook.yml` - run it with `ansible`
   * From another host:
-    * create a `hosts` file: `echo 'tmp ansible_ssh_host=IP-OF-BASE-VM' > hosts`
-    * run ansible: `ansible-playbook -i hosts --ask-pass vagrant-setup-playbook.yml`
+    * open `bitrise.yml` from this directory, and define the environment variables listed at the top
+      * you should define those in the `.bitrise.secrets.yml`, saved into this directory
+    * that's all, you can now run `bitrise run vagrant-setup`
 
 * Check the available OS X updates in the App Store (don't sign into the App Store!),
   and install the system updates.
 * Run `xcode-select --install` and install the Xcode Command Line tools (popup should appear)
+* Install the Xcode version you want to use, to the canonical path (`/Applications/Xcode.app`)
+  * Open it after the install, accept the EULA
+  * Create a test iOS project with UI Tests, build & run tests - allow Developer mode when prompted
+  * Create a test Mac OS X project with UI Tests, build & run tests - allow Accessibility for UI tests when prompted
+  * install all the available SDKs and Simulators
+    * Xcode -> Preferences -> Downloads -> Components
+  * open the iOS Simulator from Xcode -> Open Developer Tools (in the statusbar menu) -> iOS Simulator and validate that it works
+* Now you can run the actual VM environment setup:
+  * with bitrise CLI: `bitrise run provision-vm`
+* Right now we have to run one more thing, to create the deprecated xcode version mapping files:
+  * with bitrise CLI: `bitrise run DEPRECATED-create-xcode-version-mapping`
+  * This'll be removed in the near future, but right now required for backward compatibility
+* NOTE: you can also `bitrise trigger step/X` these workflows, where `X` is the order of the step
+  * e.g. `bitrise trigger step/1` runs the same as `bitrise run vagrant-setup`, as that's the first Bitrise CLI "step" of this guide
+
+
+## Layout of this repository
+
+* Root (the directory this README file is in) contains the main `ansible` setup playbooks, and this guide/overview README
+* `tools` dir: will be synchronized as-it-is to the Virtual Machine, under `$HOME/bitrise/tools`
+
+
+## OS X version notes
+
+* This repository is meant to be used / tested with OS X El Capitan (10.11)
+* Other OS X versions should also work, but might require minor modifications
+  * Previous OS X versions (up until 10.11) stored the `sshd_config` in `/etc/sshd_config` - this changed in `10.11` to `/etc/ssh/sshd_config`
