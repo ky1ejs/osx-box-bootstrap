@@ -140,7 +140,8 @@
     - homebrew: name=node state=present
     - homebrew: name=ansible state=present
     - homebrew: name=coreutils state=present
-    - homebrew: name=ruby state=present
+    # - homebrew: name=ruby state=present
+    - homebrew: name=homebrew/versions/ruby21 state=present
     ## Go
     # Gopath is $HOME/go
     - homebrew: name=go state=present
