@@ -1,8 +1,0 @@
-app:
-  build: .
-  # run in server mode
-  command: cmd-bridge
-  ports:
-    - 27473:27473
-  volumes:
-    - .:/go/src/github.com/bitrise-io/cmd-bridge

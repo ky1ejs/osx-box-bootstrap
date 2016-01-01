@@ -8,9 +8,6 @@ export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
-# StepLib environments
-[[ -s "$HOME/.profiles/steplib_profile" ]] && source "$HOME/.profiles/steplib_profile"
-
 # Bitrise environments
 [[ -s "$HOME/.profiles/bitrise_profile" ]] && source "$HOME/.profiles/bitrise_profile"
 

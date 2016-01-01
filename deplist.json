@@ -1,8 +1,0 @@
-{
-	"deps":[
-		{
-			"url": "https://github.com/bitrise-io/cmd-bridge.git",
-			"store_path": "tools/cmd-bridge"
-		}
-	]
-}

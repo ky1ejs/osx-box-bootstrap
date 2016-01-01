@@ -1,68 +1,61 @@
-format_version: 0.9.10
+format_version: 1.1.0
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
 app:
   envs:
-  - BITRISE_PROJECT_TITLE: ""
-    opts:
-      is_expand: true
-  - BITRISE_DEV_BRANCH: ""
-    opts:
-      is_expand: true
+  - ANSIBLE_HOST_KEY_CHECKING: 'False'
+  # define these in the .bitrise.secrets.yml
+  - VM_BUILD_BOX_VERSION: $VM_BUILD_BOX_VERSION
+  - VM_BUILD_IP: $VM_BUILD_IP
+
+trigger_map:
+- pattern: step/1
+  workflow: vagrant-setup
+- pattern: step/2
+  workflow: provision-vm
+- pattern: step/3
+  workflow: DEPRECATED-create-xcode-version-mapping
+
 workflows:
-  defaults-change-start:
-    summary: |-
-      Call before changing OS X System Preferences if you
-      want to detect the related change's `defaults` equivalient.
 
-      Full instructions: http://apple.stackexchange.com/questions/79761/editing-system-preferences-via-terminal
+  vagrant-setup:
+    description: |-
+      Runs `ansible` with the `vagrant-setup-playbook`, to have a bare minimum
+      `vagrant` ready setup on the target VM.
     steps:
     - script:
-        title: Hello Bitrise!
         inputs:
         - content: |-
             #!/bin/bash
             set -e
-            set -v
+            echo " (!!!) When prompted for a password provide the VM's SSH password"
+            echo '       should be "vagrant" if you do a default vagrant setup'
+            set -x
+            ansible-playbook --ask-pass -i "${VM_BUILD_IP}", "./vagrant-setup-playbook.yml"
 
-            sudo rm -rf ./before
-            rm -rf ./usr-before
-
-            sudo cp -r /Library/Preferences ./before
-            cp -r ~/Library/Preferences ./usr-before
-
-  defaults-change-diff:
-    summary: |-
-      Call after you changed OS X System Prefs and it'll tell you
-      the difference compared to when you called `defaults-change-start`
+  provision-vm:
+    description: |-
+      Runs `ansible` with the `playbook.yml` playbook, to provision the
+      Virtual Machine. After this the VM should be completely ready,
+      you just have to save it / package it / distribute it.
     steps:
     - script:
-        title: Hello Bitrise!
         inputs:
         - content: |-
             #!/bin/bash
             set -e
-            set -v
+            set -x
+            ansible-playbook -e bitrise_box_version="${VM_BUILD_BOX_VERSION}" --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./playbook.yml"
 
-            sudo rm -rf ./after
-            rm -rf ./usr-after
-            sudo cp -r /Library/Preferences ./after
-            cp -r ~/Library/Preferences ./usr-after
-
-
-
-            # System
-            set +e
-            sudo diff -ur before after
-
-
-
-            # User
-            diff -ur usr-before usr-after
-
-
-            # Get the setting's name
-            # alias plist='plutil -convert xml1 -o /dev/stdout'
-            # diff -u <(plist before/Preferences/com.apple.loginwindow.plist) <(plist after/Preferences/com.apple.loginwindow.plist)
-            # diff -u <(plist before/${filename}) <(plist after/${filename})
-            # diff -u <(plist usr-before/${filename}) <(plist usr-after/${filename})
-            echo "DONE"
+  DEPRECATED-create-xcode-version-mapping:
+    description: |-
+      DEPRECATED: will be removed in the near future, as we don't pre-install multiple Xcode versions
+      in the same VM anymore (mainly because of incompatibility issues).
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -x
+            ansible-playbook --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./xcode-version-map-files-playbook.yml"

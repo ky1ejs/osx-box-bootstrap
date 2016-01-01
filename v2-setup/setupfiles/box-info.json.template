@@ -1,5 +1,0 @@
-{
-  "version": "{{ bitrise_box_version }}",
-  "applied_patches": [
-  ]
-}
