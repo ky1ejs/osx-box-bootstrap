@@ -146,12 +146,18 @@
     - homebrew: name=node state=present
     - homebrew: name=ansible state=present
     - homebrew: name=coreutils state=present
+
+    # Ruby
     # - homebrew: name=ruby state=present
-    - homebrew: name=chruby state=present
-    - homebrew: name=ruby-install state=present
-    - shell: ruby-install ruby 2.2.4
+    # for now use our pinned 2.2.4 version, as CocoaPods doesn't work with
+    #  the latest, 2.3.0 Ruby
+    - shell: bash -l -c "brew tap bitrise-io/homebrew-pinned"
+    - shell: bash -l -c "brew install bitrise-io/homebrew-pinned/ruby"
       args:
-        creates: /Users/{{ param_user }}/.rubies/ruby-2.2.4/bin/ruby
+        creates: /usr/local/Cellar/ruby/2.2.4/bin/ruby
+    # make sure the symlink exists
+    - shell: ls -alh /usr/local/bin/ruby
+
     ## Go
     # Gopath is $HOME/go
     - homebrew: name=go state=present
