@@ -27,12 +27,12 @@ Table of Content:
 * Create a new OS X VM
   * 4 GB RAM
   * 2 CPU
-  * about 60 GB disk space
+  * about 100 GB disk space
 * Start the VM
 * Install OS X:
   * OS X won't see the hard drive, you'll have to open Disk Utility (you can
     find it in the menu bar of the OS X installer) and format the disk
-  * Select the 60 GB disk on the left side, and then Erase it
+  * Select the 100 GB disk on the left side, and then Erase it
   * Format: Mac OS Extended (Journaled)
   * Name: Macintosh HD
   * Clone Disk Utility, you should now be able to select this disk for the install.
