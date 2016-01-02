@@ -147,7 +147,11 @@
     - homebrew: name=ansible state=present
     - homebrew: name=coreutils state=present
     # - homebrew: name=ruby state=present
-    - homebrew: name=homebrew/versions/ruby21 state=present
+    - homebrew: name=chruby state=present
+    - homebrew: name=ruby-install state=present
+    - shell: ruby-install ruby 2.2.4
+      args:
+        creates: /Users/{{ param_user }}/.rubies/ruby-2.2.4/bin/ruby
     ## Go
     # Gopath is $HOME/go
     - homebrew: name=go state=present

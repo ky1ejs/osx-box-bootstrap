@@ -11,4 +11,10 @@ export PATH="$PATH:$GOPATH/bin"
 # Bitrise environments
 [[ -s "$HOME/.profiles/bitrise_profile" ]] && source "$HOME/.profiles/bitrise_profile"
 
+# chruby
+if [[ -s "/usr/local/share/chruby/chruby.sh" ]] ; then
+  source /usr/local/share/chruby/chruby.sh
+  chruby 2.2.4
+fi
+
 # keep a newline at the end of this file
