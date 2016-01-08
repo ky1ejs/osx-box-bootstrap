@@ -168,6 +168,9 @@ Once installed:
 * NOTE: you can also `bitrise trigger step/X` these workflows, where `X` is the order of the step
   * e.g. `bitrise trigger step/1` runs the same as `bitrise run vagrant-setup`, as that's the first Bitrise CLI "step" of this guide
 
+### Xamarin notes
+
+* Run `bitrise run provision-xamarin-vm`
 
 ## Layout of this repository
 
