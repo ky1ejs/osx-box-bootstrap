@@ -1,0 +1,9 @@
+export BITRISE_XAMARIN_FOLDER_PATH="${BITRISE_FOLDER_PATH}/xamarin"
+
+# Android Environment Variables
+export ANDROID_HOME=$HOME/Library/Developer/Xamarin/android-sdk-macosx
+export COMPONENT_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/xamarin-component"
+export NUNIT_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/nunit/3.0.1/bin"
+
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
