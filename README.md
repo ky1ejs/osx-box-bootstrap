@@ -176,7 +176,8 @@ Once installed:
 
 ### Xamarin notes
 
-* Run `bitrise run provision-xamarin-vm`
+To add the Xamarin specific bits you should also run this,
+after you ran the previous steps: `bitrise run provision-xamarin-vm`
 
 ## Layout of this repository
 

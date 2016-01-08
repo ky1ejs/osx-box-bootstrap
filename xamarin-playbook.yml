@@ -12,10 +12,6 @@
   tasks:
     #
     # Required param checks
-    - fail: msg="bitrise_box_version not defined (format example 'r2p3')"
-      when: bitrise_box_version|default("") == ""
-    - debug: msg=" (i) bitrise_box_version = {{ bitrise_box_version }}"
-    - debug: msg=" (!) Incremental Setup? {{ is_incremental_setup|default(false) }}"
 
     #
     # Setup profiles

@@ -15,7 +15,7 @@ trigger_map:
   workflow: provision-vm
 - pattern: step/3
   workflow: DEPRECATED-create-xcode-version-mapping
-- pattern: step/4
+- pattern: step/xamarin
   workflow: provision-xamarin-vm
 
 workflows:
@@ -49,20 +49,6 @@ workflows:
             set -x
             ansible-playbook -e bitrise_box_version="${VM_BUILD_BOX_VERSION}" --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./playbook.yml"
 
-  provision-xamarin-vm:
-    description: |-
-      Runs `ansible` with the `xamarin_playbook.yml` playbook, to provision the
-      Virtual Machine. After this the VM should be completely ready,
-      you just have to save it / package it / distribute it.
-    steps:
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -e
-            set -x
-            ansible-playbook -e bitrise_box_version="${VM_BUILD_BOX_VERSION}" --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./xamarin_playbook.yml"
-
   DEPRECATED-create-xcode-version-mapping:
     description: |-
       DEPRECATED: will be removed in the near future, as we don't pre-install multiple Xcode versions
@@ -75,3 +61,17 @@ workflows:
             set -e
             set -x
             ansible-playbook --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./xcode-version-map-files-playbook.yml"
+
+  provision-xamarin-vm:
+    description: |-
+      Runs `ansible` with the `xamarin-playbook.yml` playbook, to provision the
+      Virtual Machine. After this the VM should be completely ready,
+      you just have to save it / package it / distribute it.
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -x
+            ansible-playbook --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./xamarin-playbook.yml"
