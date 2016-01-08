@@ -146,6 +146,8 @@
     - homebrew: name=node state=present
     - homebrew: name=ansible state=present
     - homebrew: name=coreutils state=present
+    - homebrew: name=watchman state=present
+    - homebrew: name=flow state=present
 
     # Ruby
     # - homebrew: name=ruby state=present
