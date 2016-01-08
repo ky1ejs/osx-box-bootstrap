@@ -23,8 +23,9 @@
         owner="{{ param_user }}"
         mode=0600
     # this adds the Xamarin profile to the .bashrc profile
-    - name: setup xamarin_profile
-      shell: echo "[[ -s \"$HOME/.profiles/xamarin_profile\" ]] && source \"$HOME/.profiles/xamarin_profile\"" >> "$HOME/.bashrc"
+    - shell: echo "" >> "$HOME/.bashrc"
+    - shell: echo "[[ -s \"$HOME/.profiles/xamarin_profile\" ]] && source \"$HOME/.profiles/xamarin_profile\"" >> "$HOME/.bashrc"
+    - shell: echo "" >> "$HOME/.bashrc"
 
     # Install Android SDKs and other build packages
     # Other tools and resources of Android SDK
