@@ -151,7 +151,10 @@ Once installed:
     * Xcode -> Preferences -> Downloads -> Components
   * open the iOS Simulator from Xcode -> Open Developer Tools (in the statusbar menu) -> iOS Simulator and validate that it works
 
-### Run auto setups, with ansible
+### Final steps: Run auto setups, with ansible
+
+* Check the available OS X updates in the App Store (don't sign into the App Store!),
+  and install the system updates, then reboot the VM.
 
 * To activate the vagrant insecure key, which will be used during the setup:
   * If your ssh-agent is not running: `eval $(ssh-agent)`
@@ -162,9 +165,6 @@ Once installed:
     * open `bitrise.yml` from this directory, and define the environment variables listed at the top
       * you should define those in the `.bitrise.secrets.yml`, saved into this directory
     * that's all, you can now run `bitrise run vagrant-setup`
-
-* Check the available OS X updates in the App Store (don't sign into the App Store!),
-  and install the system updates.
 
 * Now you can run the actual VM environment setup:
   * with bitrise CLI: `bitrise run provision-vm`
