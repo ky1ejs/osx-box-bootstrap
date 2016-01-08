@@ -1,0 +1,65 @@
+---
+#
+# Ansible playbook to prepare a Bitrise OS X VM/box, used through vagrant
+#
+
+- hosts: all
+  # accelerate: true
+  remote_user: vagrant
+  vars:
+    - ansible_sudo_pass: vagrant
+    - param_user: vagrant
+  tasks:
+    #
+    # Required param checks
+    - fail: msg="bitrise_box_version not defined (format example 'r2p3')"
+      when: bitrise_box_version|default("") == ""
+    - debug: msg=" (i) bitrise_box_version = {{ bitrise_box_version }}"
+    - debug: msg=" (!) Incremental Setup? {{ is_incremental_setup|default(false) }}"
+
+    #
+    # Setup profiles
+    # this is the main Xamarin profile, includes
+    #  the Xamarin specific environments
+    - name: setup xamarin_profile
+      copy: src=profiles/xamarin_profile
+        dest="/Users/{{ param_user }}/.profiles/xamarin_profile"
+        owner="{{ param_user }}"
+        mode=0600
+    # this adds the Xamarin profile to the .bashrc profile
+    - name: setup xamarin_profile
+      script: echo "[[ -s \"$HOME/.profiles/xamarin_profile\" ]] && source \"$HOME/.profiles/xamarin_profile\"" >> "$HOME/.bashrc"
+
+    # Install Android SDKs and other build packages
+    # Other tools and resources of Android SDK
+    - shell: echo y | android update sdk --no-ui --all --filter platform-tools,extra-android-support
+    # google apis
+    - shell: echo y | android update sdk --no-ui --all --filter addon-google_apis-google-23,addon-google_apis-google-22,addon-google_apis-google-21
+    # SDKs
+    - shell: echo y | android update sdk --no-ui --all --filter android-23,android-22,android-21,android-20,android-19,android-17,android-15,android-10
+    # Build tools
+    - shell: echo y | android update sdk --no-ui --all --filter build-tools-23.0.2,build-tools-22.0.1,build-tools-21.1.2,build-tools-20.0.0,build-tools-19.1.0,build-tools-17.0.0
+    # Android System Images, for emulators
+    - shell: echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-23,sys-img-armeabi-v7a-android-22,sys-img-armeabi-v7a-android-21,sys-img-armeabi-v7a-android-19,sys-img-armeabi-v7a-android-17,sys-img-armeabi-v7a-android-16,sys-img-armeabi-v7a-android-15
+    # Android System Images, for emulators
+    - shell: echo y | android update sdk --no-ui --all --filter extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services
+
+    #
+    # Setup Bitrise specific folders
+    #
+    # Setup the base folders / paths, referenced by ~/.profiles/xamarin_profile
+    # These folders will be created in the HOME directory.
+    - file: path="/Users/{{ param_user }}/{{ item.fold_path }}"
+        state=directory
+        owner="{{ param_user }}"
+      with_items:
+        # Xamarin tools
+        - { fold_path: 'bitrise/xamarin' }
+
+    - synchronize: src=xamarin/ dest="/Users/{{ param_user }}/bitrise/xamarin/"
+
+    # Final debug prints
+    - debug: msg="---> Finished with automatic stuff - but here's some things you have to do manually:"
+    - debug: msg=" (!) After you finished with the preparations RESTART the machine!"
+    - debug: msg=" (!) Don't forget to remove the VM snapshots (if you used snapshots) before packaging!"
+    - debug: msg="---> Finished"
