@@ -140,6 +140,19 @@ Once installed:
 
 ## Provisioning
 
+### Install Xcode - can be saved as an intermediate template
+
+* Run `xcode-select --install` and install the Xcode Command Line tools (popup should appear)
+* Install the Xcode version you want to use, to the canonical path (`/Applications/Xcode.app`)
+  * Open it after the install, accept the EULA
+  * Create a test iOS project with UI Tests, build & run tests - allow Developer mode when prompted
+  * Create a test Mac OS X project with UI Tests, build & run tests - allow Accessibility for UI tests when prompted
+  * install all the available SDKs and Simulators
+    * Xcode -> Preferences -> Downloads -> Components
+  * open the iOS Simulator from Xcode -> Open Developer Tools (in the statusbar menu) -> iOS Simulator and validate that it works
+
+### Run auto setups, with ansible
+
 * To activate the vagrant insecure key, which will be used during the setup:
   * If your ssh-agent is not running: `eval $(ssh-agent)`
   * then: `ssh-add ./vagrant-insecure_private_key`
@@ -152,14 +165,7 @@ Once installed:
 
 * Check the available OS X updates in the App Store (don't sign into the App Store!),
   and install the system updates.
-* Run `xcode-select --install` and install the Xcode Command Line tools (popup should appear)
-* Install the Xcode version you want to use, to the canonical path (`/Applications/Xcode.app`)
-  * Open it after the install, accept the EULA
-  * Create a test iOS project with UI Tests, build & run tests - allow Developer mode when prompted
-  * Create a test Mac OS X project with UI Tests, build & run tests - allow Accessibility for UI tests when prompted
-  * install all the available SDKs and Simulators
-    * Xcode -> Preferences -> Downloads -> Components
-  * open the iOS Simulator from Xcode -> Open Developer Tools (in the statusbar menu) -> iOS Simulator and validate that it works
+
 * Now you can run the actual VM environment setup:
   * with bitrise CLI: `bitrise run provision-vm`
 * Right now we have to run one more thing, to create the deprecated xcode version mapping files:
