@@ -95,6 +95,8 @@ if [ ! -z "$BITRISE_XAMARIN_FOLDER_PATH" ] ; then
   echo
   echo "=== Xamarin specific ==================="
   echo
+  echo "--- Android"
+  echo
   echo "* build-tools:"
   ls -1 ${ANDROID_HOME}/build-tools
   echo
