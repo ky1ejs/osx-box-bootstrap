@@ -89,3 +89,23 @@ echo "=== System infos ======================="
 info_line="$( df -kh / | grep '/' )" ;            echo "* Free disk space: $info_line"
 echo "========================================"
 echo
+
+if [ ! -z "$BITRISE_XAMARIN_FOLDER_PATH" ] ; then
+  brew install tree
+  echo
+  echo "=== Xamarin specific ==================="
+  echo
+  echo "* build-tools:"
+  ls -1 ${ANDROID_HOME}/build-tools
+  echo
+  echo "* extras:"
+  tree -L 2 ${ANDROID_HOME}/extras
+  echo
+  echo "* platforms:"
+  ls -1 ${ANDROID_HOME}/platforms
+  echo
+  echo "* system-images:"
+  tree -L 3 ${ANDROID_HOME}/system-images
+  echo "========================================"
+  echo
+fi
