@@ -32,6 +32,8 @@ ver_line="$(node --version)" ;                    echo "* Node.js: $ver_line"
 ver_line="$(npm --version)" ;                     echo "* NPM: $ver_line"
 ver_line="$(ansible --version | grep ansible)" ;  echo "* Ansible: $ver_line"
 ver_line="$(gtimeout --version | grep 'timeout')" ;  echo "* gtimeout: $ver_line"
+ver_line="$(watchman --version)" ;                echo "* watchman: $ver_line"
+ver_line="$(flow version)" ;                      echo "* flow: $ver_line"
 
 echo
 echo "--- Bitrise CLI tool versions"
