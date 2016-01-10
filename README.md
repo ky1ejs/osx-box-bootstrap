@@ -10,6 +10,7 @@ You can find tool specific setup & packaging instructions below.
 
 Table of Content:
 
+0. Request a tool to be pre-installed
 1. Create VM & OS X installation
   * how to create the base VM & install a vanilla OS X
 2. Provisioning
@@ -18,6 +19,18 @@ Table of Content:
 3. Packaging
   * how to save the create VM in a `vagrant` ready box format, which can then
     be simply used with `vagrant`
+
+
+## Request a tool to be pre-installed
+
+**If you'd like to add a tool** to be pre-installed you can create a
+Pull Request, adding your changes to the `playbook.yml` ([Ansible](http://docs.ansible.com) playbook) of this repository.
+*Please also add* a related test/report to the `system_report.sh` file,
+which is used to test & list the pre-installed tools.
+
+When a new version of this stack is available on [bitrise.io](https://www.bitrise.io)
+we'll run `system_report.sh` and post the result into
+the [bitrise.io GitHub repository](https://github.com/bitrise-io/bitrise.io), under the `system_reports` folder.
 
 
 ## Create VM & OS X installation
