@@ -64,6 +64,15 @@ echo "========================================"
 echo
 
 echo
+echo "=== Checking Xcode CLT dirs ============"
+# installed by `xcode-select --install`, if called *before*
+#  Xcode.app is installed
+echo " * ls -alh /usr/include/CommonCrypto"
+ls -alh /usr/include/CommonCrypto
+echo "========================================"
+echo
+
+echo
 echo "=== Xcode =============================="
 echo
 echo "* Active Xcode Command Line Tools:"
