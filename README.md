@@ -155,7 +155,8 @@ Once installed:
 
 ### Install Xcode - can be saved as an intermediate template
 
-* Run `xcode-select --install` and install the Xcode Command Line tools (popup should appear)
+* Run `xcode-select --install` and install the Xcode Command Line Tools (popup should appear)
+* __Wait for the CLT install to finish__, or else the `/usr/include` paths won't be created!
 * Install the Xcode version you want to use, to the canonical path (`/Applications/Xcode.app`)
   * Open it after the install, accept the EULA
   * Create a test iOS project with UI Tests, build & run tests - allow Developer mode when prompted
