@@ -72,8 +72,8 @@ echo
 echo " * ls -alh /usr/include/CommonCrypto"
 ls -alh /usr/include/CommonCrypto
 echo
-echo " * ls -alh ls -alh /Library/Developer/CommandLineTools/"
-ls -alh ls -alh /Library/Developer/CommandLineTools/
+echo " * ls -alh /Library/Developer/CommandLineTools/"
+ls -alh /Library/Developer/CommandLineTools/
 echo
 echo " * /Library/Developer/CommandLineTools/usr/bin/swift --version"
 /Library/Developer/CommandLineTools/usr/bin/swift --version
