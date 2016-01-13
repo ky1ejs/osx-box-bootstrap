@@ -8,11 +8,11 @@ echo '#  Pull Requests are welcome!'
 echo '#'
 echo
 
-# echo
-# echo "=== Revision / ID ======================"
-# echo "* BITRISE_OSX_REV_NUMBER: $BITRISE_OSX_REV_NUMBER"
-# echo "========================================"
-# echo
+echo
+echo "=== Revision / ID ======================"
+echo "* BITRISE_OSX_STACK_REV_ID: $BITRISE_OSX_STACK_REV_ID"
+echo "========================================"
+echo
 
 # Make sure that the reported version is only
 #  a single line!
@@ -41,6 +41,7 @@ ver_line="$(ansible --version | grep ansible)" ;  echo "* Ansible: $ver_line"
 ver_line="$(gtimeout --version | grep 'timeout')" ;  echo "* gtimeout: $ver_line"
 ver_line="$(watchman --version)" ;                echo "* watchman: $ver_line"
 ver_line="$(flow version)" ;                      echo "* flow: $ver_line"
+ver_line="$(tree --version)" ;                    echo "* tree: $ver_line"
 
 echo
 echo "--- Bitrise CLI tool versions"
@@ -67,8 +68,16 @@ echo
 echo "=== Checking Xcode CLT dirs ============"
 # installed by `xcode-select --install`, if called *before*
 #  Xcode.app is installed
+echo
 echo " * ls -alh /usr/include/CommonCrypto"
 ls -alh /usr/include/CommonCrypto
+echo
+echo " * ls -alh ls -alh /Library/Developer/CommandLineTools/"
+ls -alh ls -alh /Library/Developer/CommandLineTools/
+echo
+echo " * /Library/Developer/CommandLineTools/usr/bin/swift --version"
+/Library/Developer/CommandLineTools/usr/bin/swift --version
+echo
 echo "========================================"
 echo
 

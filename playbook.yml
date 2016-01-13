@@ -148,6 +148,7 @@
     - homebrew: name=coreutils state=present
     - homebrew: name=watchman state=present
     - homebrew: name=flow state=present
+    - homebrew: name=tree state=present
 
     # Ruby
     # - homebrew: name=ruby state=present
