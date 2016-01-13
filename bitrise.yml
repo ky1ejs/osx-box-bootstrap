@@ -47,6 +47,7 @@ workflows:
             #!/bin/bash
             set -e
             set -x
+            echo " * VM_BUILD_BOX_VERSION: $VM_BUILD_BOX_VERSION"
             ansible-playbook -e bitrise_box_version="${VM_BUILD_BOX_VERSION}" --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./playbook.yml"
 
   DEPRECATED-create-xcode-version-mapping:
