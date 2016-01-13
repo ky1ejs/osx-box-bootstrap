@@ -170,6 +170,10 @@ Once installed:
 * Check the available OS X updates in the App Store (don't sign into the App Store!),
   and install the system updates, then reboot the VM.
 
+*NOTE: you should call the bitrise commands from a `tmux` session,
+to make it easier to manage the process, as some of the steps take
+quite some time.*
+
 * To activate the vagrant insecure key, which will be used during the setup:
   * If your ssh-agent is not running: `eval $(ssh-agent)`
   * then: `ssh-add ./vagrant-insecure_private_key`
@@ -189,6 +193,14 @@ Once installed:
   * e.g. `bitrise trigger step/1` runs the same as `bitrise run vagrant-setup`, as that's the first Bitrise CLI "step" of this guide
 
 ### Xamarin notes
+
+Install Xamarin Platform
+
+* from: https://xamarin.com/platform
+* don't install the Xamarin.Mac component for now
+* launch Xamarin Studio and set it to "don't check for updates"
+  * Menu bar : Xamarin Studio -> Check for updates -> uncheck
+* close Xamarin Studio
 
 To add the Xamarin specific bits you should also run this,
 after you ran the previous steps: `bitrise run provision-xamarin-vm`
