@@ -7,7 +7,6 @@
 - hosts: all
   # accelerate: true
   remote_user: vagrant
-  user: vagrant
   vars:
     - ansible_sudo_pass: vagrant
   tasks:
