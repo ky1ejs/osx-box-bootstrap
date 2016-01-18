@@ -157,7 +157,7 @@ Once installed:
 
 * Run `xcode-select --install` and install the Xcode Command Line Tools (popup should appear)
 * __Wait for the CLT install to finish__, or else the `/usr/include` paths won't be created!
-* Install the Xcode version you want to use, to the canonical path (`/Applications/Xcode.app`)
+* Install the Xcode version you want to use, to the canonical path (`/Applications/Xcode.app` or `/Applications/Xcode-beta.app` in case of beta Xcode)
   * Open it after the install, accept the EULA
   * Create a test iOS project with UI Tests, build & run tests - allow Developer mode when prompted
   * Create a test Mac OS X project with UI Tests, build & run tests - allow Accessibility for UI tests when prompted

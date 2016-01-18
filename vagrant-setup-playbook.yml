@@ -2,6 +2,7 @@
 - hosts: all
   # accelerate: true
   remote_user: vagrant
+  become_method: sudo
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
@@ -10,7 +11,7 @@
     # Add user to sudoers-no-password
     #  don't require password for running sudo with this user
     - name: "Add user {{ param_user }} to sudoers with no password"
-      sudo: yes
+      become: yes
       lineinfile: "dest=/etc/sudoers
         regexp='^{{ param_user }} ALL'
         line='{{ param_user }} ALL=(ALL) NOPASSWD: ALL'

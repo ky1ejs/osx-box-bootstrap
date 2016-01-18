@@ -6,6 +6,7 @@
 - hosts: all
   # accelerate: true
   remote_user: vagrant
+  become_method: sudo
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
@@ -31,7 +32,7 @@
     # Add user to sudoers-no-password
     #  don't require password for running sudo with this user
     - name: "Add user {{ param_user }} to sudoers with no password"
-      sudo: yes
+      become: yes
       lineinfile: "dest=/etc/sudoers
         regexp='^{{ param_user }} ALL'
         line='{{ param_user }} ALL=(ALL) NOPASSWD: ALL'
@@ -42,7 +43,8 @@
     # Switch to Xcode stable, for brew-ing and anything else
     #  what requires Xcode / Xcode Command Line Tools (e.g. Ruby gems
     #  with native extension)
-    - shell: bash -l -c "sudo xcode-select --switch /Applications/Xcode.app"
+    - shell: bash -l -c "xcode-select --switch {{ xcode_path }}"
+      become: yes
 
     #
     # SSH config
@@ -60,7 +62,7 @@
     # Disable every non SSH key based setup option
     #  allow only SSH key based SSH login
     - name: sshd_config settings
-      sudo: yes
+      become: yes
       lineinfile: dest=/etc/ssh/sshd_config
         regexp="{{ item.regexp }}"
         line="{{ item.line }}"
@@ -131,7 +133,8 @@
         mode=0600
 
     # Turn off automatic update
-    - shell: sudo softwareupdate --schedule off
+    - shell: softwareupdate --schedule off
+      become: yes
 
     #
     # Install and update homebrew
@@ -234,7 +237,8 @@
 
     #
     # Switch to Xcode stable, the default Xcode for building
-    - shell: bash -l -c "sudo xcode-select --switch /Applications/Xcode.app"
+    - shell: bash -l -c "xcode-select --switch {{ xcode_path }}"
+      become: yes
 
     #
     # Final debug prints

@@ -14,7 +14,7 @@
     - shell: |-
         mkdir -p /Applications/Xcodes
     - shell: |-
-        printf %s /Applications/Xcode.app > /Applications/Xcodes/{{item.version_map_file}}
+        printf %s {{xcode_path}} > /Applications/Xcodes/{{item.version_map_file}}
       with_items:
         - { version_map_file: 'version-map--stable' }
         - { version_map_file: 'version-map--beta' }

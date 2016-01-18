@@ -1,3 +1,8 @@
+## 2016_01_18_1
+
+* Updated `ansible` playbooks, for Ansible 2.0
+* Xcode path can (and should) be specified.
+
 ## 2016_01_13_1
 
 * `tree` is now pre-installed

@@ -7,6 +7,8 @@ app:
   # define these in the .bitrise.secrets.yml
   - VM_BUILD_BOX_VERSION: $VM_BUILD_BOX_VERSION
   - VM_BUILD_IP: $VM_BUILD_IP
+  # Full, absolute Xcode path, e.g.: /Applications/Xcode.app
+  - XCODE_PATH: $XCODE_PATH
 
 trigger_map:
 - pattern: step/1
@@ -48,7 +50,7 @@ workflows:
             set -e
             set -x
             echo " * VM_BUILD_BOX_VERSION: $VM_BUILD_BOX_VERSION"
-            ansible-playbook -e bitrise_box_version="${VM_BUILD_BOX_VERSION}" --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./playbook.yml"
+            ansible-playbook -e bitrise_box_version="${VM_BUILD_BOX_VERSION}" -e xcode_path="${XCODE_PATH}" --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./playbook.yml"
 
   DEPRECATED-create-xcode-version-mapping:
     description: |-
@@ -61,7 +63,7 @@ workflows:
             #!/bin/bash
             set -e
             set -x
-            ansible-playbook --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./xcode-version-map-files-playbook.yml"
+            ansible-playbook -e xcode_path="${XCODE_PATH}" --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./xcode-version-map-files-playbook.yml"
 
   provision-xamarin-vm:
     description: |-
